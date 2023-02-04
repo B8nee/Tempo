@@ -21,12 +21,12 @@
     "vite",
     "typescript"
   ],
-  "author": "B8ne",
+  "author": "B8ne, MarelGuy, MoriDan1",
   "license": "ISC",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/B8nee/Tempo/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/B8nee/Tempo",
   "devDependencies": {
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.5",
