@@ -1,0 +1,38 @@
+{
+  "name": "tempo",
+  "version": "1.0",
+  "description": "Tempo Game for the Phaser Game Jam 2023",
+  "main": "./src/main.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "phaser",
+    "game",
+    "jam",
+    "2023",
+    "tempo",
+    "vite",
+    "typescript"
+  ],
+  "author": "B8ne",
+  "license": "ISC",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "devDependencies": {
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.1"
+  },
+  "dependencies": {
+    "phaser": "^3.55.2"
+  }
+}
