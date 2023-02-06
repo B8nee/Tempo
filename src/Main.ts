@@ -1,7 +1,9 @@
 import Phaser from 'phaser';
 import Boot from './Boot';
 
+
 class Main extends Phaser.Scene {
+  scene: any;
   constructor(config: Phaser.Types.Core.GameConfig) {
     super(config);
   }
