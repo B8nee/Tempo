@@ -16,8 +16,8 @@ class Main extends Phaser.Scene {
 const config = {
   type: Phaser.AUTO,
   parent: 'Game',
-  width: 1024,
-  height: 768,
+  width: 800,
+  height: 600,
   scene: [Main, Boot],
 };
 
