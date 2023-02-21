@@ -9,4 +9,4 @@ Work in progress..!
 
 ## Credits
 
-Authors: B8ne, MarelGuy, MoriDan1, Mqtrix
+Authors: B8ne, MarelGuy, MoriDan1, Mqtrix, Salvatore
