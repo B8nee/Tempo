@@ -5,16 +5,17 @@ import Gameplay from './Gameplay';
 import Credits from './Credits';
 import Commands from './Commands';
 
-
 class Main extends Phaser.Scene {
   constructor(config: Phaser.Types.Core.GameConfig) {
     super(config);
   }
 
-  preload() {}
+  preload() {
+    this.load.image('menu', '../assets/img/menu/menu.png');
+  }
 
   create() {
-    this.scene.start('Gameplay');
+    this.scene.start('Preloader');
   }
 }
 
