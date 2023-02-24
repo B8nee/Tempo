@@ -3,6 +3,7 @@ import { GameData } from "./GameData";
 import {
   BitmapfontAsset,
   ImageAsset,
+  SpritesheetAsset,
 } from "./Types";
 
 class Preloader extends Phaser.Scene {
@@ -65,7 +66,7 @@ class Preloader extends Phaser.Scene {
       assetText.destroy();
     });
 
-    for (var i = 0; i < 200; i++) {
+   for (var i = 0; i < 200; i++) {
       this.load.image("fav_icon" + i, "/../assets/img/favicon/favicon.png");
       this.load.image("background" + i, "/../assets/img/favicon/favicon.png");
       this.load.image("sound" + i, "/../assets/img/favicon/favicon.png");
@@ -90,6 +91,11 @@ class Preloader extends Phaser.Scene {
       GameData.bitmapfont.forEach((element: BitmapfontAsset) => {
         this.load.bitmapFont(element.name, element.imgpath, element.xmlpath);
       });
+
+    if (GameData.spritesheet != null)
+    GameData.spritesheet.forEach((element: SpritesheetAsset) => {
+      this.load.spritesheet(element.name, element.path, element.frameConfig, element.xhrSettings);
+    });
   }
 }
 export default Preloader;

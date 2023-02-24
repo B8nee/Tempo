@@ -21,5 +21,37 @@ export const GameData: any = {
         imgpath: "../assets/font/arcade.png",
         xmlpath: "../assets/font/arcade.xml",
       },
+      {
+        name: "rickAndMorty",
+        imgpath: "../assets/font/rickAndMorty.png",
+        xmlpath: "../assets/font/rickAndMorty.fnt",
+      },
+    ],
+
+    spritesheet: [
+      {
+        name: "arrows",
+        path: "../assets/img/commands/arrows.png",
+        frameConfig: {
+          frameWidth: 32,
+          frameHeight: 32,
+        },
+      },
+      {
+        name: "spacebar",
+        path: "../assets/img/commands/spaceBar.png",
+        frameConfig:{
+          frameWidth: 96,
+          frameHeight: 32,
+        }
+      },
+      {
+        name: "morty_spritesheet",
+        path: "../assets/img/gameplay/morty_spritesheet.png",
+        frameConfig:{
+          frameWidth: 142,
+          frameHeight: 142,
+        },
+      }
     ],
   };

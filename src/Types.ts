@@ -20,13 +20,17 @@ interface genericConfig {
     path: string;
   }
   
-  interface SpritesheetsAsset {
+  interface SpritesheetAsset {
     name: string;
     path: string;
-    width: number;
-    height: number;
-    frames: number;
-    spacing?: number;
+    frameConfig?: {
+      frameWidth: number;
+      frameHeight?: number;
+    };
+    xhrSettings?: {
+      responseType: XMLHttpRequestResponseType;
+    }
+
   }
   
   interface SoundAsset {
@@ -53,5 +57,5 @@ interface genericConfig {
     jsonpath: string;
   }
   
-  export {genericConfig, ImageAsset, ScriptAsset, TileMapsAsset, SpritesheetsAsset, SoundAsset, AudioSpriteAsset, BitmapfontAsset, AtlasAsset};
+  export {genericConfig, ImageAsset, ScriptAsset, TileMapsAsset, SpritesheetAsset, SoundAsset, AudioSpriteAsset, BitmapfontAsset, AtlasAsset};
   

@@ -11,6 +11,7 @@ class Gameplay extends Phaser.Scene {
     rickSelected: Phaser.GameObjects.Image;
     mortySelected: Phaser.GameObjects.Image;
     testoScelta: Phaser.GameObjects.BitmapText;
+    menu: Phaser.GameObjects.BitmapText;
     
     constructor() {
         super({ key: "Gameplay" });
@@ -29,6 +30,12 @@ class Gameplay extends Phaser.Scene {
 
         selectionBG.fillStyle(0x222222, 0.8);
         selectionBG.fillRect(this.game.canvas.width/2 - 325, this.game.canvas.height/2 - 280, 650, 450).setDepth(1);
+
+        this.menu = this.add.bitmapText(20, 10, 'arcade', 'Menu')
+        .setInteractive()
+        .on("pointerdown", () => this.scene.start("Menu"))
+        .on("pointerover", () => this.menu.setTint(0x19081b))
+        .on("pointerout", () => this.menu.setTint(0xffffff));
         
         this.testoScelta = this.add.bitmapText(this.game.canvas.width/2 - 265, this.game.canvas.height/2 - 245, "arcade", "MAKE YOUR CHOICE!").setDepth(1).setOrigin(0, 0);
 
@@ -50,6 +57,7 @@ class Gameplay extends Phaser.Scene {
             selectionBG.destroy();
             this.testoScelta.destroy();
             this.gameplay();
+            this.menu.destroy();
         });
 
         this.mortySel = this.add.image(this.game.canvas.width/2 + 5, this.game.canvas.height/2 - 150, "mortySel").setDepth(1).setOrigin(0, 0).setScale(0.75).setInteractive().on("pointerover", () => {
@@ -66,6 +74,7 @@ class Gameplay extends Phaser.Scene {
             selectionBG.destroy();
             this.testoScelta.destroy();
             this.gameplay();
+            this.menu.destroy();
         });
     }
 
