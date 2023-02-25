@@ -52,6 +52,14 @@ export const GameData: any = {
           frameWidth: 142,
           frameHeight: 142,
         },
+      },
+      {
+        name: "fireball_spritesheet",
+        path: "../assets/img/gameplay/fireball.png",
+        frameConfig:{
+          frameWidth: 32,
+          frameHeight: 32,
+        },
       }
     ],
   };
