@@ -2,16 +2,13 @@ import Phaser from "phaser";
 
 class Gameplay extends Phaser.Scene {
     dinosaurbg: Phaser.GameObjects.Image;
-    neolbg: Phaser.GameObjects.Image;
-    medievalbg: Phaser.GameObjects.Image; 
-    warbg: Phaser.GameObjects.Image;
-    modernbg: Phaser.GameObjects.Image;
     rickSel: Phaser.GameObjects.Image;
     mortySel: Phaser.GameObjects.Image;
     rickSelected: Phaser.GameObjects.Image;
     mortySelected: Phaser.GameObjects.Image;
     testoScelta: Phaser.GameObjects.BitmapText;
     menu: Phaser.GameObjects.BitmapText;
+    scelta: String;
     
     constructor() {
         super({ key: "Gameplay" });
@@ -50,6 +47,7 @@ class Gameplay extends Phaser.Scene {
             this.rickSelected.setAlpha(0)
             this.rickSel.setScale(0.75).setAlpha(1).setX(this.game.canvas.width/2 - 79)
         }).on("pointerdown", () => {
+            this.scelta = "rick_spritesheet";
             this.rickSel.destroy();
             this.mortySel.destroy();
             this.rickSelected.destroy();
@@ -67,6 +65,7 @@ class Gameplay extends Phaser.Scene {
             this.mortySelected.setAlpha(0)
             this.mortySel.setScale(0.75).setAlpha(1)
         }).on("pointerdown", () => {
+            this.scelta = "morty_spritesheet";
             this.rickSel.destroy();
             this.mortySel.destroy();
             this.rickSelected.destroy();
@@ -78,7 +77,13 @@ class Gameplay extends Phaser.Scene {
         });
     }
 
-    gameplay() {}
+    gameplay() {
+        if(this.scelta == "rick_spritesheet") {
+            this.scene.start("GameRick", {scelta: this.scelta});
+        } else {
+            this.scene.start("GameMorty", {scelta: this.scelta});
+        }
+    }
 }
 
 export default Gameplay;

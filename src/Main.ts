@@ -4,6 +4,8 @@ import Menu from './Menu';
 import Gameplay from './Gameplay';
 import Credits from './Credits';
 import Commands from './Commands';
+import GameRick from './GameRick';
+import GameMorty from './GameMorty';
 
 class Main extends Phaser.Scene {
   constructor(config: Phaser.Types.Core.GameConfig) {
@@ -24,16 +26,28 @@ const config = {
   parent: 'Game',
   width: 1280,
   height: 720,
+
   physics:{
     default: 'arcade',
     arcade: {
-      debug: false,
+      debug: true,
       gravity: {
-        y:0
+        y:1400
       },
     }
   },
-  scene: [Main, Preloader, Menu, Gameplay, Credits, Commands],
+
+  scene: [Main, Preloader, Menu, Gameplay, Credits, Commands, GameRick, GameMorty],
+
+  input: {
+    activePointers: 2,
+    keyboard: true,
+  },
+  
+  render: {
+    pixelArt: true,
+    antialias: false,
+  },
 };
 
 new Phaser.Game(config);
