@@ -1,11 +1,10 @@
 import Phaser from 'phaser';
 import Preloader from './Preloader';
 import Menu from './Menu';
-import Gameplay from './Gameplay';
+import CharacterSelection from './CharacterSelection';
 import Credits from './Credits';
 import Commands from './Commands';
-import GameRick from './GameRick';
-import GameMorty from './GameMorty';
+import GameScene from './GameScene';
 
 class Main extends Phaser.Scene {
   constructor(config: Phaser.Types.Core.GameConfig) {
@@ -37,7 +36,7 @@ const config = {
     }
   },
 
-  scene: [Main, Preloader, Menu, Gameplay, Credits, Commands, GameRick, GameMorty],
+  scene: [Main, Preloader, Menu, CharacterSelection, Credits, Commands, GameScene],
 
   input: {
     activePointers: 2,

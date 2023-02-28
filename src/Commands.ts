@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import Animations from "./Animations";
 import FireBallGroup from "./FireBallGroup";
 
 class Commands extends Phaser.Scene {
@@ -18,6 +19,8 @@ class Commands extends Phaser.Scene {
     //commands
     spaceBar: Phaser.Input.Keyboard.Key;
     cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
+
+    animations: Animations;
 
     shooting: boolean;
     eventIsListened: boolean;
@@ -47,12 +50,12 @@ class Commands extends Phaser.Scene {
         playerBG.fillStyle(0x041c34, 0.8);
         playerBG.fillRect((width/2 - (commandsBG_width/8))-10, (height/2 - (commandsBG_height/8))-35, commandsBG_width/4 +20, commandsBG_height/4 +30);
 
-        this.createAnimations();
         this.createCommands();
 
         this.myPlayer = this.add.sprite(width/2 , 350, 'morty_spritesheet', 0);
         this.fireBallGroup = new FireBallGroup(this);
-
+        this.animations = new Animations(this);
+        this.animations.createCommandsAnimations();
 
 
         this.menu = this.add.bitmapText(width/2 - (commandsBG_width/2) +25, height/2 - (commandsBG_height/2) + 25, "arcade", "MENU")
@@ -106,12 +109,12 @@ class Commands extends Phaser.Scene {
         }
         else if(this.cursorKeys.left.isDown){
             this.myPlayer.scaleX = -1;
-            this.myPlayer.play("walk_right", true);
+            this.myPlayer.play("walk", true);
             this.myArrowLeft.play("arrowLeft", true);
         }
         else if(this.cursorKeys.right.isDown){
             this.myPlayer.scaleX = 1;
-            this.myPlayer.play("walk_right", true);
+            this.myPlayer.play("walk", true);
             this.myArrowRight.play("arrowRight", true);
         }
         else if(this.eventIsListened == false){
@@ -136,78 +139,6 @@ class Commands extends Phaser.Scene {
         this.cursorKeys = this.input.keyboard.createCursorKeys();
     }
 
-    createAnimations(){
-
-        this.anims.create({
-            key: "arrowDown",
-            frameRate: 1,
-            frames: this.anims.generateFrameNumbers("arrows", { start: 0, end: 1 }),
-            repeat: -1
-        });
-        this.anims.create({
-            key: "arrowLeft",
-            frameRate: 1,
-            frames: this.anims.generateFrameNumbers("arrows", { start: 2, end: 3 }),
-            repeat: -1
-        });
-        this.anims.create({
-            key: "arrowRight",
-            frameRate: 1,
-            frames: this.anims.generateFrameNumbers("arrows", { start: 4, end: 5 }),
-            repeat: -1
-        });
-        this.anims.create({
-            key: "arrowUp",
-            frameRate: 1,
-            frames: this.anims.generateFrameNumbers("arrows", { start: 6, end: 7 }),
-            repeat: -1
-        });
-        this.anims.create({
-            key: "spaceBar",
-            frameRate: 1,
-            frames: this.anims.generateFrameNumbers("spacebar", { start: 0, end: 1 }),
-            repeat: -1
-        });
-        this.anims.create({
-            key: "walk_left",
-            frameRate: 6,
-            frames:this.anims.generateFrameNames("morty_spritesheet", {start: 4, end: 7}),
-            repeat: -1
-        });
-        this.anims.create({
-            key: "walk_right",
-            frameRate: 6,
-            frames:this.anims.generateFrameNames("morty_spritesheet", {start: 8, end: 11}),
-            repeat: -1
-        });
-        this.anims.create({
-            key: "jump",
-            frameRate: 6,
-            frames:this.anims.generateFrameNames("morty_spritesheet", {start: 12, end: 15}),
-            repeat: -1,
-        });
-        this.anims.create({
-            key: "crouch",
-            frameRate: 6,
-            frames:this.anims.generateFrameNames("morty_spritesheet", {start: 16, end: 19}),
-            repeat: -1,
-            repeatDelay: 100,           
-        });
-        this.anims.create({
-            key: "shoot",
-            frameRate: 6,
-            frames:this.anims.generateFrameNames("morty_spritesheet", {start: 20, end: 23}),
-            repeat: 0,           
-        });
-        this.anims.create({
-            key: "fireball",
-            frameRate: 6,
-            frames: this.anims.generateFrameNames("fireball_spritesheet", {start: 0, end: 2}),
-            repeat: -1,
-        })
-    }
-    
-
     addEvents(){
         this.myArrowDown
         .on("pointerover", () => {
@@ -221,7 +152,7 @@ class Commands extends Phaser.Scene {
         this.myArrowLeft
         .on("pointerover", () => {
             this.myPlayer.scaleX = -1;
-            this.startAnimation(this.myArrowLeft, this.myPlayer, "arrowLeft", "walk_right");
+            this.startAnimation(this.myArrowLeft, this.myPlayer, "arrowLeft", "walk");
             this.eventIsListened = true;
         })
         .on("pointerout", () => {
@@ -231,7 +162,7 @@ class Commands extends Phaser.Scene {
         this.myArrowRight 
         .on("pointerover", () => {
             this.myPlayer.scaleX = 1;
-            this.startAnimation(this.myArrowRight, this.myPlayer, "arrowRight", "walk_right");
+            this.startAnimation(this.myArrowRight, this.myPlayer, "arrowRight", "walk");
             this.eventIsListened = true;
         })
         .on("pointerout", () => {

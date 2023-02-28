@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-class Gameplay extends Phaser.Scene {
+class CharacterSelection extends Phaser.Scene {
     dinosaurbg: Phaser.GameObjects.Image;
     rickSel: Phaser.GameObjects.Image;
     mortySel: Phaser.GameObjects.Image;
@@ -11,7 +11,7 @@ class Gameplay extends Phaser.Scene {
     scelta: String;
     
     constructor() {
-        super({ key: "Gameplay" });
+        super({ key: "CharacterSelection" });
         
     }
     
@@ -48,14 +48,7 @@ class Gameplay extends Phaser.Scene {
             this.rickSel.setScale(0.75).setAlpha(1).setX(this.game.canvas.width/2 - 79)
         }).on("pointerdown", () => {
             this.scelta = "rick_spritesheet";
-            this.rickSel.destroy();
-            this.mortySel.destroy();
-            this.rickSelected.destroy();
-            this.mortySelected.destroy();
-            selectionBG.destroy();
-            this.testoScelta.destroy();
-            this.gameplay();
-            this.menu.destroy();
+            this.scene.start("GameScene", {scelta: this.scelta});
         });
 
         this.mortySel = this.add.image(this.game.canvas.width/2 + 5, this.game.canvas.height/2 - 150, "mortySel").setDepth(1).setOrigin(0, 0).setScale(0.75).setInteractive().on("pointerover", () => {
@@ -66,24 +59,9 @@ class Gameplay extends Phaser.Scene {
             this.mortySel.setScale(0.75).setAlpha(1)
         }).on("pointerdown", () => {
             this.scelta = "morty_spritesheet";
-            this.rickSel.destroy();
-            this.mortySel.destroy();
-            this.rickSelected.destroy();
-            this.mortySelected.destroy();
-            selectionBG.destroy();
-            this.testoScelta.destroy();
-            this.gameplay();
-            this.menu.destroy();
+            this.scene.start("GameScene", {scelta: this.scelta});
         });
-    }
-
-    gameplay() {
-        if(this.scelta == "rick_spritesheet") {
-            this.scene.start("GameRick", {scelta: this.scelta});
-        } else {
-            this.scene.start("GameMorty", {scelta: this.scelta});
-        }
     }
 }
 
-export default Gameplay;
+export default CharacterSelection;
