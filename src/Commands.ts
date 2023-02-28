@@ -42,7 +42,7 @@ class Commands extends Phaser.Scene {
 
         commandsBG.fillStyle(0x041c34, 0.8);
         commandsBG.fillRect(width/2 - (commandsBG_width/2), height/2 - (commandsBG_height/2), commandsBG_width, commandsBG_height);
-        this.commandsTitle = this.add.bitmapText(width/2 -200, height/2 - (commandsBG_height/2) + 25, "rickAndMorty", "Commands", 100);
+        this.commandsTitle = this.add.bitmapText(width/2 -200, height/2 - (commandsBG_height/2) + 25, "RickAndMorty", "Commands", 100);
 
         playerBG.fillStyle(0x041c34, 0.8);
         playerBG.fillRect((width/2 - (commandsBG_width/8))-10, (height/2 - (commandsBG_height/8))-35, commandsBG_width/4 +20, commandsBG_height/4 +30);

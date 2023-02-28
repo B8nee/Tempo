@@ -30,9 +30,9 @@ export const GameData: any = {
         xmlpath: "../assets/font/arcade.xml",
       },
       {
-        name: "rickAndMorty",
-        imgpath: "../assets/font/rickAndMorty.png",
-        xmlpath: "../assets/font/rickAndMorty.fnt",
+        name: "RickAndMorty",
+        imgpath: "../assets/font/RickAndMorty.png",
+        xmlpath: "../assets/font/RickAndMorty.fnt",
       },
     ],
 

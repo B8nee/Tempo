@@ -79,9 +79,9 @@ class Gameplay extends Phaser.Scene {
 
     gameplay() {
         if(this.scelta == "rick_spritesheet") {
-            this.scene.start("GameRick", {scelta: this.scelta});
+            this.scene.start("GameRick");
         } else {
-            this.scene.start("GameMorty", {scelta: this.scelta});
+            this.scene.start("GameMorty");
         }
     }
 }
