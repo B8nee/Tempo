@@ -27,7 +27,7 @@ class Credits extends Phaser.Scene {
         this.text = this.add.text(screenCenterX,screenY + 300,this.cache.text.get('data'), {fontFamily: 'Arial Black',fontSize: '50px'})
         .setAlign('center').setOrigin(0.5, 0);
 
-        this.masulloThetiLogo = this.add.bitmapText(screenCenterX, screenY +1000, 'rickAndMorty', 'I.T.C.S.G. Masullo Theti', 100)
+        this.masulloThetiLogo = this.add.bitmapText(screenCenterX, screenY +1000, 'RickAndMorty', 'I.T.C.S.G. Masullo Theti', 100)
         .setAlpha(1)
         .setOrigin(0.5, 0.5)
         .setCenterAlign().setLetterSpacing();

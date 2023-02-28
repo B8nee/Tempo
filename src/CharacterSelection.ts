@@ -62,6 +62,17 @@ class CharacterSelection extends Phaser.Scene {
             this.scene.start("GameScene", {scelta: this.scelta});
         });
     }
+<<<<<<< HEAD:src/CharacterSelection.ts
+=======
+
+    gameplay() {
+        if(this.scelta == "rick_spritesheet") {
+            this.scene.start("GameRick");
+        } else {
+            this.scene.start("GameMorty");
+        }
+    }
+>>>>>>> 409bb981bfb71a522d3cf5a5c9a88b878f30a765:src/Gameplay.ts
 }
 
 export default CharacterSelection;
