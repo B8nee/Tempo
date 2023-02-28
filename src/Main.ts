@@ -21,8 +21,8 @@ class Main extends Phaser.Scene {
 }
 
 const config = {
-  type: Phaser.AUTO,
-  parent: 'Game',
+  type: Phaser.CANVAS,
+  parent: '',
   width: 1280,
   height: 720,
 
@@ -46,6 +46,7 @@ const config = {
   render: {
     pixelArt: true,
     antialias: false,
+    roundsPixels: true
   },
 };
 

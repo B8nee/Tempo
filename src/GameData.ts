@@ -4,17 +4,31 @@ export const GameData: any = {
 
         // General Images
         { name: "favicon", path: "../assets/img/favicon/favicon.png" },
+        { name: "base", path: "../assets/img/gameplay/base.png" },
 
         // Menu Images
         { name: "menu", path: "../assets/img/menu/menu.png" },
         { name: "title", path: "../assets/img/menu/title.png" },
         { name: "subtitle", path: "../assets/img/menu/subtitle.png" },
+        { name: "dino", path: "../assets/img/gameplay/dino.jpg" },
 
         // Level Images
-        { name: "dino", path: "../assets/img/gameplay/dino.jpg" },
-        { name: "futuro", path: "../assets/img/gameplay/futuro.jpg" },
-        { name: "medioevo", path: "../assets/img/gameplay/medioevo.png" },
-        { name: "pietra", path: "../assets/img/gameplay/pietra.jpg" },
+        { name: "futuro1", path: "../assets/img/gameplay/futuro1.png" },
+        { name: "futuro2", path: "../assets/img/gameplay/futuro2.png" },
+        { name: "futuro3", path: "../assets/img/gameplay/futuro3.png" },
+        { name: "guerra1", path: "../assets/img/gameplay/guerra1.png" },
+        { name: "guerra2", path: "../assets/img/gameplay/guerra2.png" },
+        { name: "guerra3", path: "../assets/img/gameplay/guerra3.png" },
+        { name: "guerra4", path: "../assets/img/gameplay/guerra4.png" },
+        { name: "guerra5", path: "../assets/img/gameplay/guerra5.png" },
+        { name: "pre1", path: "../assets/img/gameplay/pre1.png" },
+        { name: "pre2", path: "../assets/img/gameplay/pre2.png" },
+        { name: "pre3", path: "../assets/img/gameplay/pre3.png" },
+        { name: "pre4", path: "../assets/img/gameplay/pre4.png" },
+        { name: "pre5", path: "../assets/img/gameplay/pre5.png" },
+        { name: "pre6", path: "../assets/img/gameplay/pre6.png" },
+        { name: "pre7", path: "../assets/img/gameplay/pre7.png" },
+        { name: "pre8", path: "../assets/img/gameplay/pre8.png" },
 
         // Character Selection Images
         { name: "rickSel", path: "../assets/img/gameplay/rickSel.png" },
