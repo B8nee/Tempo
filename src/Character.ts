@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import GameScene from './GameScene';
 import { genericConfig } from './types';
 import Animations from './Animations';
-import FireBallGroup from "./FireBallGroup";
+import Shot from './Shot';
 
 class Character extends Phaser.GameObjects.Sprite {
     config: genericConfig;
@@ -11,8 +11,8 @@ class Character extends Phaser.GameObjects.Sprite {
     cursors: Phaser.Types.Input.Keyboard.CursorKeys;
     spacebar: Phaser.Input.Keyboard.Key;
     controlloW: boolean = true;
-    fireBallGroup: FireBallGroup;
     spawn: boolean = true;
+    animations: Animations;
 
     constructor(params: genericConfig) {
         super(params.scene, params.x, params.y, params.key);
@@ -61,7 +61,16 @@ class Character extends Phaser.GameObjects.Sprite {
         if (Phaser.Input.Keyboard.JustDown(this.cursors.space)) {
             if (this.controlloW) {
                 this.anims.play("shoot", true);
-                this.fireBallGroup.fireFireBall(this.x, this.y, this.scaleX, 765, 520);
+                const shot = new Shot(
+                    {
+                        scene: this._scene,
+                        x: this.x,
+                        y: this.y,
+                        key: "fireball_spritesheet",
+                    }
+                );
+                shot.create();
+                shot.update();
             }
         }
     }

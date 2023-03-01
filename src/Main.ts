@@ -21,7 +21,7 @@ class Main extends Phaser.Scene {
 }
 
 const config = {
-  type: Phaser.CANVAS,
+  type: Phaser.AUTO,
   parent: '',
   width: 1280,
   height: 720,

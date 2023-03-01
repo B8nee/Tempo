@@ -1,14 +1,14 @@
 import Phaser from 'phaser';
 import Animations from './Animations';
 import Character from './Character';
-import FireBallGroup from "./FireBallGroup";
+import Shot from './Shot';
 
 class GameScene extends Phaser.Scene {
     selectedCharacter: string;
     character: Character;
     animations: Animations;
-    fireballGroup: Phaser.GameObjects.Group;
     base: any;
+    shotGroup: Phaser.GameObjects.Group;
 
     futuro1: Phaser.GameObjects.TileSprite;
     futuro2: Phaser.GameObjects.TileSprite;
@@ -39,8 +39,7 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
-
-        this.fireballGroup = this.add.group({ runChildUpdate: true});
+        this.shotGroup = this.add.group({runChildUpdate: true});
 
         this.character = new Character({
             scene: this,
@@ -54,6 +53,7 @@ class GameScene extends Phaser.Scene {
         this.base = this.physics.add.staticGroup();
 
         this.base.create(0, 1000, 'base').setScale(0);
+        this.base.create(1280, 1000, 'base').setScale(0);
 
         this.physics.add.collider(this.character, this.base);
 
@@ -97,12 +97,14 @@ class GameScene extends Phaser.Scene {
         else if(this.selectedCharacter == 'morty_spritesheet'){
             this.animations.createMortyAnimations();
         }
+    }
 
+    addShot(shot: Shot) {
+        this.shotGroup.add(shot);
+    }
 
-        this.character.play("spawn");
-
-
-
+    removeShot(shot: Shot) {
+        this.shotGroup.remove(shot, true, true);
     }
 
     update() {
