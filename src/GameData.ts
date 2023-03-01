@@ -93,6 +93,15 @@ export const GameData: any = {
           frameWidth: 32,
           frameHeight: 32,
         },
+      },
+
+      {
+        name: "robot_spritesheet",
+        path: "../assets/img/gameplay/robot_spritesheet.png",
+        frameConfig:{
+          frameWidth: 192.5,
+          frameHeight: 216,
+        },
       }
     ],
   };

@@ -14,10 +14,9 @@ class FireBall extends Phaser.Physics.Arcade.Sprite{
         this.setVisible(true);
         this.setCollideWorldBounds(true);
 
-        this.setVelocityX(playerScaleX * 300);
-        this.play("fireball");
-
         
+        this.setVelocityX(1900);
+        this.play("fireball");
     }
 
 
@@ -25,8 +24,7 @@ class FireBall extends Phaser.Physics.Arcade.Sprite{
         super.preUpdate(time, delta);
 
         if(this.x >= this.max || this.x < this.min){
-            this.setActive(false);
-            this.setVisible(false);
+            this.destroy();
         }
         
     }

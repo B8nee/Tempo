@@ -99,8 +99,7 @@ class Animations extends Phaser.GameObjects.Container{
             key: "crouch",
             frameRate: 6,
             frames:this.scene.anims.generateFrameNames("rick_spritesheet", {start: 16, end: 19}),
-            repeat: -1,
-            repeatDelay: 100,           
+            repeat: 0,          
         });
         this.scene.anims.create({
             key: "shoot",
@@ -116,8 +115,22 @@ class Animations extends Phaser.GameObjects.Container{
     createGameAnimations(){
         this.scene.anims.create({
             key: "fireball",
-            frameRate: 6,
+            frameRate: 3,
             frames: this.scene.anims.generateFrameNames("fireball_spritesheet", {start: 0, end: 2}),
+            repeat: -1,
+        }),
+
+        this.scene.anims.create({
+            key: "robot-walk",
+            frameRate: 6,
+            frames: this.scene.anims.generateFrameNames("robot_spritesheet", {start: 3, end: 0}),
+            repeat: -1,
+        }),
+
+        this.scene.anims.create({
+            key: "robot-walk-infinite",
+            frameRate: 6,
+            frames: this.scene.anims.generateFrameNames("robot_spritesheet", {start: 0, end: 0}),
             repeat: -1,
         })
     }

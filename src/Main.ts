@@ -5,6 +5,7 @@ import CharacterSelection from './CharacterSelection';
 import Credits from './Credits';
 import Commands from './Commands';
 import GameScene from './GameScene';
+import Hud from './Hud';
 
 class Main extends Phaser.Scene {
   constructor(config: Phaser.Types.Core.GameConfig) {
@@ -21,7 +22,7 @@ class Main extends Phaser.Scene {
 }
 
 const config = {
-  type: Phaser.AUTO,
+  type: Phaser.CANVAS,
   parent: '',
   width: 1280,
   height: 720,
@@ -29,14 +30,14 @@ const config = {
   physics:{
     default: 'arcade',
     arcade: {
-      debug: true,
+      debug: false,
       gravity: {
         y:1400
       },
     }
   },
 
-  scene: [Main, Preloader, Menu, CharacterSelection, Credits, Commands, GameScene],
+  scene: [Main, Preloader, Menu, CharacterSelection, Credits, Commands, GameScene, Hud],
 
   input: {
     activePointers: 2,

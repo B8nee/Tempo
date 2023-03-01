@@ -12,7 +12,6 @@ class CharacterSelection extends Phaser.Scene {
     
     constructor() {
         super({ key: "CharacterSelection" });
-        
     }
     
     preload() {
@@ -48,7 +47,7 @@ class CharacterSelection extends Phaser.Scene {
             this.rickSel.setScale(0.75).setAlpha(1).setX(this.game.canvas.width/2 - 79)
         }).on("pointerdown", () => {
             this.scelta = "rick_spritesheet";
-            this.scene.start("GameScene", {scelta: this.scelta});
+            this.scene.start("GameScene", {scelta: this.scelta, level: 1});
         });
 
         this.mortySel = this.add.image(this.game.canvas.width/2 + 5, this.game.canvas.height/2 - 150, "mortySel").setDepth(1).setOrigin(0, 0).setScale(0.75).setInteractive().on("pointerover", () => {
@@ -59,7 +58,9 @@ class CharacterSelection extends Phaser.Scene {
             this.mortySel.setScale(0.75).setAlpha(1)
         }).on("pointerdown", () => {
             this.scelta = "morty_spritesheet";
-            this.scene.start("GameScene", {scelta: this.scelta});
+            this.scene.start("GameScene", {scelta: this.scelta, level: 1});
+            // this.scene.start("Hud", {level: 1});
+            // this.scene.bringToTop("Hud");
         });
     }
 }
