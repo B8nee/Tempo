@@ -20,7 +20,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.config.scene.physics.world.enable(this);
         this._body = <Phaser.Physics.Arcade.Body>this.body;
         this._scene.add.existing(this);
-        this._body.setSize(95, 160, true).setOffset(15, 30);
+        this._body.setSize(100, 160, true).setOffset(30, 22);
 
         this._body.setDragX(100).setCollideWorldBounds(true, 0.5);
     }
@@ -31,12 +31,12 @@ class Enemy extends Phaser.GameObjects.Sprite {
         }
 
             if (this.spawn) {
-                this.anims.play("robot-walk", true);
+                this.anims.play("e-walk", true);
                 delay(500).then(() => {
                     this.spawn = false;
                 });  
             } else {
-                this.anims.play("robot-walk-infinite", true);
+                this.anims.play("e-walk-infinite", true);
             }
 
         this._body.setVelocityX(-100);

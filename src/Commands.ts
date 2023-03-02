@@ -60,7 +60,10 @@ class Commands extends Phaser.Scene {
 
         this.menu = this.add.bitmapText(width/2 - (commandsBG_width/2) +25, height/2 - (commandsBG_height/2) + 25, "arcade", "MENU")
         .setInteractive()
-        .on("pointerdown", () => this.scene.start("Menu"))
+        .on("pointerdown", () => {
+            this.scene.stop("Commands"),
+            this.scene.start("Menu")
+        })
         .on("pointerover", () => this.menu.setTint(0xb2df28))
         .on("pointerout", () => this.menu.setTint(0xffffff));
 

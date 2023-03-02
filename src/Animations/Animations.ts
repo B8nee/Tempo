@@ -73,6 +73,7 @@ class Animations extends Phaser.GameObjects.Container{
         });
 
         this.createGameAnimations();
+        this.createRobotAnimations();
         
     }
 
@@ -109,6 +110,7 @@ class Animations extends Phaser.GameObjects.Container{
         });
 
         this.createGameAnimations();
+        this.createRobotAnimations();
         
     }
 
@@ -118,20 +120,23 @@ class Animations extends Phaser.GameObjects.Container{
             frameRate: 3,
             frames: this.scene.anims.generateFrameNames("fireball_spritesheet", {start: 0, end: 2}),
             repeat: -1,
-        }),
+        });
+    }
 
+    createRobotAnimations(){
         this.scene.anims.create({
-            key: "robot-walk",
+            key: "e-walk",
             frameRate: 6,
             frames: this.scene.anims.generateFrameNames("robot_spritesheet", {start: 3, end: 0}),
             repeat: -1,
         }),
 
         this.scene.anims.create({
-            key: "robot-walk-infinite",
+            key: "e-walk-infinite",
             frameRate: 6,
             frames: this.scene.anims.generateFrameNames("robot_spritesheet", {start: 0, end: 0}),
             repeat: -1,
         })
     }
+
 } export default Animations

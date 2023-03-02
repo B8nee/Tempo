@@ -30,7 +30,7 @@ const config = {
   physics:{
     default: 'arcade',
     arcade: {
-      debug: false,
+      debug: true,
       gravity: {
         y:1400
       },
@@ -47,7 +47,8 @@ const config = {
   render: {
     pixelArt: true,
     antialias: false,
-    roundsPixels: true
+    roundsPixels: true,
+    powerPreference: 'high-performance'
   },
 };
 

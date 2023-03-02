@@ -5,6 +5,7 @@ export const GameData: any = {
         // General Images
         { name: "favicon", path: "../assets/img/favicon/favicon.png" },
         { name: "base", path: "../assets/img/gameplay/general/base.png" },
+        { name: "base2", path: "../assets/img/gameplay/general/base2.png" },
 
         // Menu Images
         { name: "menu", path: "../assets/img/menu/menu.png" },
@@ -25,16 +26,16 @@ export const GameData: any = {
         { name: "pre2", path: "../assets/img/gameplay/level1/pre2.png" },
         { name: "pre3", path: "../assets/img/gameplay/level1/pre3.png" },
         { name: "pre4", path: "../assets/img/gameplay/level1/pre4.png" },
-        { name: "pre5", path: "../assets/img/gameplay/level1/pre5.png" },
-        { name: "pre6", path: "../assets/img/gameplay/level1/pre6.png" },
-        { name: "pre7", path: "../assets/img/gameplay/level1/pre7.png" },
-        { name: "pre8", path: "../assets/img/gameplay/level1/pre8.png" },
 
         // Character Selection Images
         { name: "rickSel", path: "../assets/img/gameplay/characters/rickSel.png" },
         { name: "mortySel", path: "../assets/img/gameplay/characters/mortySel.png" },
         { name: "rick", path: "../assets/img/gameplay/characters/rick.png" },
-        { name: "morty", path: "../assets/img/gameplay/characters/morty.png" }
+        { name: "morty", path: "../assets/img/gameplay/characters/morty.png" },
+
+        // Objects
+        { name: "skull", path: "../assets/img/gameplay/objects/skull.png" },
+        { name: "time", path: "../assets/img/gameplay/objects/time.png" },
     ],
 
     bitmapfont: [
@@ -101,6 +102,15 @@ export const GameData: any = {
         frameConfig:{
           frameWidth: 192.5,
           frameHeight: 216,
+        },
+      },
+
+      {
+        name: "heart",
+        path: "../assets/img/gameplay/objects/heart.png",
+        frameConfig:{
+          frameWidth: 32,
+          frameHeight: 32,
         },
       }
     ],

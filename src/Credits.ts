@@ -18,7 +18,10 @@ class Credits extends Phaser.Scene {
 
         this.menu = this.add.bitmapText(20, 10, 'arcade', 'Menu')
         .setInteractive()
-        .on("pointerdown", () => this.scene.start("Menu"))
+        .on("pointerdown", () => {
+            this.scene.stop("Credits"),
+            this.scene.start("Menu")
+        })
         .on("pointerover", () => this.menu.setTint(0xb2df28))
         .on("pointerout", () => this.menu.setTint(0xffffff));
 

@@ -9,6 +9,7 @@ class GameScene extends Phaser.Scene {
     character: Character;
     animations: Animations;
     base: any;
+    base2: any;
     shotGroup: Phaser.GameObjects.Group;
     enemyGroup: Phaser.GameObjects.Group;
     enemy: Enemy;
@@ -53,14 +54,14 @@ class GameScene extends Phaser.Scene {
         this.character = new Character({
             scene: this,
             x: 320,
-            y: 640,
+            y: 615,
             key: this.selectedCharacter + '_spritesheet'
         }).setDepth(100);
 
         this.enemy = new Enemy({
             scene: this,
             x: 1100,
-            y: 600,
+            y: 550,
             key: 'robot_spritesheet',
         }).setDepth(100);
 
@@ -77,18 +78,38 @@ class GameScene extends Phaser.Scene {
         );
 
         this.base = this.physics.add.staticGroup();
+        this.base2 = this.physics.add.staticGroup();
 
-        this.base.create(0, 1000, 'base').setScale(0);
-        this.base.create(1280, 1000, 'base').setScale(0);
+        this.base.create(0, 975, 'base').setScale(0);
+        this.base.create(1280, 975, 'base').setScale(0);
+
+        this.base.create(640, 600, 'base2').setScale(0);
 
 
         this.physics.add.collider(this.character, this.base);
         this.physics.add.collider(this.enemy, this.base);
+        this.physics.add.collider(this.enemyGroup, this.base);
 
         this.physics.add.collider(
             this.shotGroup,
             this.enemy,
             this.hitEnemy,
+            undefined,
+            this
+        );
+
+        this.physics.add.collider(
+            this.character,
+            this.enemyGroup,
+            this.hitCharacter,
+            undefined,
+            this
+        );
+
+        this.physics.add.collider(
+            this.character,
+            this.enemy,
+            this.hitCharacter,
             undefined,
             this
         );
@@ -117,21 +138,13 @@ class GameScene extends Phaser.Scene {
                 break;
 
             case 1:
-                this.pre1 = this.add.tileSprite(0, 0, 0, 0, 'pre1').setOrigin(0, 0).setDepth(1).setScale(0.7);
+                this.pre1 = this.add.tileSprite(0, 0, 0, 0, 'pre1').setOrigin(0, 0).setDepth(1).setScale(4);
 
-                this.pre2 = this.add.tileSprite(0, 0, 0, 0, 'pre2').setOrigin(0, 0).setDepth(2).setScale(0.7);
+                this.pre2 = this.add.tileSprite(0, 0, 0, 0, 'pre2').setOrigin(0, 0).setDepth(2).setScale(4);
 
-                this.pre3 = this.add.tileSprite(0, 0, 0, 0, 'pre3').setOrigin(0, 0).setDepth(3).setScale(0.7);
+                this.pre3 = this.add.tileSprite(0, 0, 0, 0, 'pre3').setOrigin(0, 0).setDepth(3).setScale(4);
 
-                this.pre4 = this.add.tileSprite(0, 0, 0, 0, 'pre4').setOrigin(0, 0).setDepth(4).setScale(0.7);
-
-                this.pre5 = this.add.tileSprite(0, 0, 0, 0, 'pre5').setOrigin(0, 0).setDepth(5).setScale(0.7);
-
-                this.pre6 = this.add.tileSprite(0, 0, 0, 0, 'pre6').setOrigin(0, 0).setDepth(6).setScale(0.7);
-
-                this.pre7 = this.add.tileSprite(0, 0, 0, 0, 'pre7').setOrigin(0, 0).setDepth(7).setScale(0.7);
-
-                this.pre8 = this.add.tileSprite(0, 0, 0, 0, 'pre8').setOrigin(0, 0).setDepth(8).setScale(0.7);
+                this.pre4 = this.add.tileSprite(0, 0, 0, 0, 'pre4').setOrigin(0, 0).setDepth(4).setScale(4);
 
                 break;
             
@@ -173,7 +186,16 @@ class GameScene extends Phaser.Scene {
             this.addEnemy(new Enemy({
                 scene: this,
                 x: 1100,
-                y: 600,
+                y: 550,
+                key: 'robot_spritesheet',
+            }).setDepth(100));
+        });
+
+        this.delay(Phaser.Math.Between(3000, 5000)).then(() => {
+            this.addEnemy(new Enemy({
+                scene: this,
+                x: 1100,
+                y: 250,
                 key: 'robot_spritesheet',
             }).setDepth(100));
         });
@@ -185,13 +207,15 @@ class GameScene extends Phaser.Scene {
             this.level++;
             if (this.level == 4) {
                 this.scene.remove('GameScene');
+                this.scene.remove('Hud');
                 this.scene.start('Menu');
             }
             this.create();
+            this.scene.stop("GameScene");
             this.scene.start('GameScene', {level: this.level, selectedCharacter: this.selectedCharacter});
-            this.scene.start("Hud");
-            this.scene.bringToTop("Hud");
         }
+
+        this.events.emit("update-score", [1]);
     }
 
     hitEnemy(shot: any, enemy: any) {
@@ -201,6 +225,11 @@ class GameScene extends Phaser.Scene {
             this.removeEnemy(enemy);
             this.contVite = 0;
         }
+    }
+
+    hitCharacter() {
+        this.scene.stop('GameScene');
+        this.scene.stop('Hud');
     }
 
     delay(ms: number) {
@@ -231,10 +260,6 @@ class GameScene extends Phaser.Scene {
                 this.pre2.tilePositionX -= -0.2;
                 this.pre3.tilePositionX -= -0.25;
                 this.pre4.tilePositionX -= -0.3;
-                this.pre5.tilePositionX -= -0.35;
-                this.pre6.tilePositionX -= -0.4;
-                this.pre7.tilePositionX -= -0.45;
-                this.pre8.tilePositionX -= -0.6;
                 break;
             default:
                 break;

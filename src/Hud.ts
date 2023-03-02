@@ -7,10 +7,13 @@ class Hud extends Phaser.Scene {
     citta: string;
     viteText: Phaser.GameObjects.BitmapText;
     vite: number;
+    viteSprite: Phaser.GameObjects.Sprite;
     nemiciText: Phaser.GameObjects.BitmapText;
     nemici: number;
+    nemiciImg: Phaser.GameObjects.Image;
     tempoText: Phaser.GameObjects.BitmapText;
     tempo: number;
+    tempoImg: Phaser.GameObjects.Image;
     gameScene: GameScene;
     level: number = 1;
 
@@ -47,19 +50,27 @@ class Hud extends Phaser.Scene {
         this.registry.set("vite", this.vite);
         this.registry.set("nemici", this.nemici);
 
-        this.viteText = this.add.bitmapText(50, 20, "arcade", "1").setFontSize(30).setTint(0x000000).setOrigin(0);
+        this.viteSprite = this.add.sprite(5, 17, "heart").setOrigin(0).setFrame(0).setScale(1.2);
+        this.viteText = this.add.bitmapText(50, 20, "arcade", "1").setFontSize(30).setTint(0xFFFFFF).setOrigin(0);
 
-        this.nemiciText = this.add.bitmapText(50, 70, "arcade", "0").setFontSize(30).setTint(0x000000).setOrigin(0);
+        this.nemiciImg = this.add.image(0, 67, "skull").setOrigin(0).setScale(0.04);
+        this.nemiciText = this.add.bitmapText(50, 70, "arcade", "0").setFontSize(30).setTint(0xFFFFFF).setOrigin(0);
+
+        this.tempoImg = this.add.image(2, 117, "time").setOrigin(0).setScale(0.4);
+        this.tempoText = this.add.bitmapText(50, 120, "arcade", "25").setFontSize(30).setTint(0xFFFFFF).setOrigin(0);
     }
 
-    update() {}
+
+    update() {
+    }
 
     updateScore(parameters: Array<any>) {
-        
+        this.nemici += parameters[0];
+        this.nemiciText.setText(this.nemici + "");
+        this.registry.set("nemici", this.nemici)
     }
 
     decreaseScore(parameters: Array<any>) {
-        
     }
 }
 

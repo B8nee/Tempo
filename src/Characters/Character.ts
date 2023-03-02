@@ -10,6 +10,7 @@ class Character extends Phaser.GameObjects.Sprite {
     _body: Phaser.Physics.Arcade.Body;
     cursors: Phaser.Types.Input.Keyboard.CursorKeys;
     spacebar: Phaser.Input.Keyboard.Key;
+    shift: Phaser.Input.Keyboard.Key;
     controlloW: boolean = true;
     spawn: boolean = true;
     animations: Animations;
@@ -23,6 +24,7 @@ class Character extends Phaser.GameObjects.Sprite {
         this._scene.add.existing(this);
         this.cursors = this.scene.input.keyboard.createCursorKeys();
         this._scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this._scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
         this._body.setSize(80, 120, true).setOffset(20, 10);
 
         this._body.setDragX(100).setCollideWorldBounds(true, 0.5);
@@ -70,6 +72,22 @@ class Character extends Phaser.GameObjects.Sprite {
                     }
                 );
                 shot.create();
+                shot.update();
+            }
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
+            if (this.controlloW) {
+                this.anims.play("shoot", true);
+                const shot = new Shot(
+                    {
+                        scene: this._scene,
+                        x: this.x,
+                        y: this.y,
+                        key: "fireball_spritesheet",
+                    }
+                );
+                shot.shotObliq();
                 shot.update();
             }
         }
