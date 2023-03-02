@@ -18,10 +18,6 @@ class Hud extends Phaser.Scene {
         super({ key: "Hud"});
     }
 
-    init(data: any) {
-        this.level = data.level;
-    }
-
     preload() {}
 
     create() {
@@ -51,9 +47,9 @@ class Hud extends Phaser.Scene {
         this.registry.set("vite", this.vite);
         this.registry.set("nemici", this.nemici);
 
-        this.viteText = this.add.bitmapText(this.game.canvas.width - 75, 20, "arcade", "1").setFontSize(30).setTint(0x000000).setOrigin(0);
+        this.viteText = this.add.bitmapText(50, 20, "arcade", "1").setFontSize(30).setTint(0x000000).setOrigin(0);
 
-        this.nemiciText = this.add.bitmapText(this.game.canvas.width - 195, 20, "arcade", "0").setFontSize(30).setTint(0x000000).setOrigin(0);
+        this.nemiciText = this.add.bitmapText(50, 70, "arcade", "0").setFontSize(30).setTint(0x000000).setOrigin(0);
     }
 
     update() {}

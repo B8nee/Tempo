@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
-import GameScene from './GameScene';
-import { genericConfig } from './types';
-import Animations from './Animations';
+import GameScene from '../GameScene';
+import { genericConfig } from '../Other/Types';
+import Animations from '../Animations/Animations';
 
 class Enemy extends Phaser.GameObjects.Sprite {
     config: genericConfig;

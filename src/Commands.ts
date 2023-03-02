@@ -1,6 +1,6 @@
 import Phaser from "phaser";
-import Animations from "./Animations";
-import FireBallGroup from "./FireBallGroup";
+import Animations from "./Animations/Animations";
+import FireBallGroup from "./Objects/FireBallGroup";
 
 class Commands extends Phaser.Scene {
     //bitmap text

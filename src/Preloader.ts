@@ -1,10 +1,10 @@
 import Phaser from "phaser";
-import { GameData } from "./GameData";
+import { GameData } from "./Other/GameData";
 import {
   BitmapfontAsset,
   ImageAsset,
   SpritesheetAsset,
-} from "./Types";
+} from "./Other/Types";
 
 class Preloader extends Phaser.Scene {
   constructor() {

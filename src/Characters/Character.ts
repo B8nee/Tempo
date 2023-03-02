@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
-import GameScene from './GameScene';
-import { genericConfig } from './types';
-import Animations from './Animations';
-import Shot from './Shot';
+import GameScene from '../GameScene';
+import { genericConfig } from '../Other/Types';
+import Animations from '../Animations/Animations';
+import Shot from '../Objects/Shot';
 
 class Character extends Phaser.GameObjects.Sprite {
     config: genericConfig;

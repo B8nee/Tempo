@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
-import Animations from './Animations';
-import Character from './Character';
-import Shot from './Shot';
-import Enemy from './Enemy';
+import Animations from './Animations/Animations';
+import Character from './Characters/Character';
+import Shot from './Objects/Shot';
+import Enemy from './Characters/Enemy';
 
 class GameScene extends Phaser.Scene {
     selectedCharacter: string;
@@ -189,8 +189,8 @@ class GameScene extends Phaser.Scene {
             }
             this.create();
             this.scene.start('GameScene', {level: this.level, selectedCharacter: this.selectedCharacter});
-            // this.scene.start("Hud", {level: 1});
-            // this.scene.bringToTop("Hud");
+            this.scene.start("Hud");
+            this.scene.bringToTop("Hud");
         }
     }
 
