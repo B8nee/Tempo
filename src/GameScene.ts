@@ -17,6 +17,9 @@ class GameScene extends Phaser.Scene {
     contVite: number = 0;
     level: number = 1;
     contEnemy: number = 0;
+    contaSpawn: number = 1;
+    portale: Phaser.GameObjects.Sprite;
+    chkON: boolean = true;
 
     futuro1: Phaser.GameObjects.TileSprite;
     futuro2: Phaser.GameObjects.TileSprite;
@@ -47,6 +50,47 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
+
+        this.chkON = true;
+
+        switch(this.level) {
+            case 3:
+                this.futuro1 = this.add.tileSprite(0, 0, 0, 0, 'futuro1').setScale(3.8).setOrigin(0, 0).setDepth(3);
+
+                this.futuro2 = this.add.tileSprite(0, 0, 0, 0, 'futuro2').setScale(5).setOrigin(0, 0).setDepth(1);
+
+                this.futuro3 = this.add.tileSprite(0, 0, 0, 0, 'futuro3').setScale(5).setOrigin(0, 0).setDepth(2);
+
+                break;
+            
+            case 2:
+                this.guerra1 = this.add.tileSprite(0, 0, 0, 0, 'guerra1').setScale(4).setOrigin(0, 0).setDepth(1);
+
+                this.guerra2 = this.add.tileSprite(0, 0, 0, 0, 'guerra2').setScale(4).setOrigin(0, 0).setDepth(2);
+
+                this.guerra3 = this.add.tileSprite(0, 0, 0, 0, 'guerra3').setScale(4).setOrigin(0, 0).setDepth(3);
+
+                this.guerra4 = this.add.tileSprite(0, 0, 0, 0, 'guerra4').setScale(4).setOrigin(0, 0).setDepth(4);
+
+                this.guerra5 = this.add.tileSprite(0, 0, 0, 0, 'guerra5').setScale(4).setOrigin(0, 0).setDepth(5);
+
+                break;
+
+            case 1:
+                this.pre1 = this.add.tileSprite(0, 0, 0, 0, 'pre1').setOrigin(0, 0).setDepth(1).setScale(4);
+
+                this.pre2 = this.add.tileSprite(0, 0, 0, 0, 'pre2').setOrigin(0, 0).setDepth(2).setScale(4);
+
+                this.pre3 = this.add.tileSprite(0, 0, 0, 0, 'pre3').setOrigin(0, 0).setDepth(3).setScale(4);
+
+                this.pre4 = this.add.tileSprite(0, 0, 0, 0, 'pre4').setOrigin(0, 0).setDepth(4).setScale(4);
+
+                break;
+            
+            default:
+                break;
+        }
+
         this.shotGroup = this.add.group({runChildUpdate: true});
 
         this.enemyGroup = this.add.group({runChildUpdate: true});
@@ -60,8 +104,8 @@ class GameScene extends Phaser.Scene {
 
         this.enemy = new Enemy({
             scene: this,
-            x: 1100,
-            y: 550,
+            x: 1300,
+            y: 606,
             key: 'robot_spritesheet',
         }).setDepth(100);
 
@@ -114,44 +158,6 @@ class GameScene extends Phaser.Scene {
             this
         );
 
-        switch(this.level) {
-            case 3:
-                this.futuro1 = this.add.tileSprite(0, 0, 0, 0, 'futuro1').setScale(3.8).setOrigin(0, 0).setDepth(3);
-
-                this.futuro2 = this.add.tileSprite(0, 0, 0, 0, 'futuro2').setScale(5).setOrigin(0, 0).setDepth(1);
-
-                this.futuro3 = this.add.tileSprite(0, 0, 0, 0, 'futuro3').setScale(5).setOrigin(0, 0).setDepth(2);
-
-                break;
-            
-            case 2:
-                this.guerra1 = this.add.tileSprite(0, 0, 0, 0, 'guerra1').setScale(4).setOrigin(0, 0).setDepth(1);
-
-                this.guerra2 = this.add.tileSprite(0, 0, 0, 0, 'guerra2').setScale(4).setOrigin(0, 0).setDepth(2);
-
-                this.guerra3 = this.add.tileSprite(0, 0, 0, 0, 'guerra3').setScale(4).setOrigin(0, 0).setDepth(3);
-
-                this.guerra4 = this.add.tileSprite(0, 0, 0, 0, 'guerra4').setScale(4).setOrigin(0, 0).setDepth(4);
-
-                this.guerra5 = this.add.tileSprite(0, 0, 0, 0, 'guerra5').setScale(4).setOrigin(0, 0).setDepth(5);
-
-                break;
-
-            case 1:
-                this.pre1 = this.add.tileSprite(0, 0, 0, 0, 'pre1').setOrigin(0, 0).setDepth(1).setScale(4);
-
-                this.pre2 = this.add.tileSprite(0, 0, 0, 0, 'pre2').setOrigin(0, 0).setDepth(2).setScale(4);
-
-                this.pre3 = this.add.tileSprite(0, 0, 0, 0, 'pre3').setOrigin(0, 0).setDepth(3).setScale(4);
-
-                this.pre4 = this.add.tileSprite(0, 0, 0, 0, 'pre4').setOrigin(0, 0).setDepth(4).setScale(4);
-
-                break;
-            
-            default:
-                break;
-        }
-
         this.animations = new Animations(this);
         
         if(this.selectedCharacter == 'rick_spritesheet'){
@@ -177,42 +183,61 @@ class GameScene extends Phaser.Scene {
     removeEnemy(enemy: Enemy) {
         this.chk = true;
         
-        this.delay(1).then(() => {
             this.enemyGroup.remove(enemy, true, true);
             this.enemy.destroy();
-        });
-
-        this.delay(Phaser.Math.Between(1000, 5000)).then(() => {
-            this.addEnemy(new Enemy({
-                scene: this,
-                x: 1100,
-                y: 550,
-                key: 'robot_spritesheet',
-            }).setDepth(100));
-        });
-
-        this.delay(Phaser.Math.Between(3000, 5000)).then(() => {
-            this.addEnemy(new Enemy({
-                scene: this,
-                x: 1100,
-                y: 250,
-                key: 'robot_spritesheet',
-            }).setDepth(100));
-        });
 
         this.contEnemy++;
 
         if(this.contEnemy == 5){
             this.contEnemy = 0;
-            this.level++;
+            // this.level++;
             if (this.level == 4) {
                 this.scene.remove('GameScene');
                 this.scene.remove('Hud');
                 this.scene.start('Menu');
             }
-            this.create();
-            this.scene.stop("GameScene");
-            this.scene.start('GameScene', {level: this.level, selectedCharacter: this.selectedCharacter});
+            // this.create();
+            // this.scene.stop("GameScene");
+            // this.scene.start('GameScene', {level: this.level, selectedCharacter: this.selectedCharacter});
+
+            this.portale = this.add.sprite(640, 600, 'portal').setScale(0.5).setDepth(100);
+            this.portale.play('portal').setFlipX(true);
+            this.portale = this.physics.add.existing(this.portale);
+
+            this.physics.add.collider(this.portale, this.base);
+
+            this.physics.add.collider(
+                this.character,
+                this.portale,
+                this.hitPortal,
+                undefined,
+                this
+            );
+
+            this.contaSpawn = 3;
+        }
+
+        if (this.contaSpawn == 0) {
+            // this.delay(Phaser.Math.Between(1000, 5000)).then(() => {
+                this.addEnemy(new Enemy({
+                    scene: this,
+                    x: 1300,
+                    y: 550,
+                    key: 'robot_spritesheet',
+                }).setDepth(100));
+            // });
+            this.contaSpawn = 1;
+        } else if (this.contaSpawn == 1) {
+            // this.delay(Phaser.Math.Between(3000, 5000)).then(() => {
+                this.addEnemy(new Enemy({
+                    scene: this,
+                    x: 1400,
+                    y: 350,
+                    key: 'robot_spritesheet',
+                }).setDepth(100));
+            // });
+
+            this.contaSpawn = 0;
         }
 
         this.events.emit("update-score", [1]);
@@ -230,39 +255,53 @@ class GameScene extends Phaser.Scene {
     hitCharacter() {
         this.scene.stop('GameScene');
         this.scene.stop('Hud');
+        this.scene.start('GameOver');
     }
 
     delay(ms: number) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    update() {
-            this.character.update();
-            if(!this.chk){
-                this.enemy.update();
-            }
+    hitPortal() {
+        this.chkON = false;
+        this.level++;
+        this.scene.stop('GameScene');
+        this.scene.start('LevelChange', {level: this.level, selectedCharacter: this.selectedCharacter});
+    }
 
-        switch(this.level) {
-            case 3:
-                this.futuro1.tilePositionX -= -0.5;
-                this.futuro2.tilePositionX -= -0.3;
-                this.futuro3.tilePositionX -= -0.35;
-                break;
-            case 2:
-                this.guerra1.tilePositionX -= -0.2;
-                this.guerra2.tilePositionX -= -0.25;
-                this.guerra3.tilePositionX -= -0.3;
-                this.guerra4.tilePositionX -= -0.35;
-                this.guerra5.tilePositionX -= -0.5;
-                break;
-            case 1:
-                this.pre1.tilePositionX -= -0.15;
-                this.pre2.tilePositionX -= -0.2;
-                this.pre3.tilePositionX -= -0.25;
-                this.pre4.tilePositionX -= -0.3;
-                break;
-            default:
-                break;
+    update() {
+        if(this.chkON == true){
+            switch(this.level) {
+                case 3:
+                    this.futuro1.tilePositionX -= -0.5;
+                    this.futuro2.tilePositionX -= -0.3;
+                    this.futuro3.tilePositionX -= -0.35;
+                    break;
+                case 2:
+                    this.guerra1.tilePositionX -= -0.2;
+                    this.guerra2.tilePositionX -= -0.25;
+                    this.guerra3.tilePositionX -= -0.3;
+                    this.guerra4.tilePositionX -= -0.35;
+                    this.guerra5.tilePositionX -= -0.5;
+                    break;
+                case 1:
+                    this.pre1.tilePositionX -= -0.15;
+                    this.pre2.tilePositionX -= -0.2;
+                    this.pre3.tilePositionX -= -0.25;
+                    this.pre4.tilePositionX -= -0.3;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        this.character.update();
+        if(!this.chk){
+            this.enemy.update();
+        }
+
+        if (this.portale != null) {
+            this.portale.x -= 1;
         }
 
     }

@@ -13,24 +13,23 @@ class Credits extends Phaser.Scene {
         this.load.text('data', 'assets/credits/credits.txt');
     }
     create() {
-        const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
+        const screenCenterX = this.cameras.main.width / 2;
         const screenY = this.cameras.main.height;
 
-        this.menu = this.add.bitmapText(20, 10, 'arcade', 'Menu')
+        this.menu = this.add.bitmapText(20, 10, 'arcade_green', 'Menu')
         .setInteractive()
         .on("pointerdown", () => {
-            this.scene.stop("Credits"),
-            this.scene.start("Menu")
+            this.scene.start("Menu");
         })
-        .on("pointerover", () => this.menu.setTint(0xb2df28))
-        .on("pointerout", () => this.menu.setTint(0xffffff));
+        .on("pointerover", () => this.menu.setFont('arcade_green'))
+        .on("pointerout", () => this.menu.setFont('arcade'));
 
         this.title = this.add.image(screenCenterX,screenY, "title").setScale(0.15);
         this.subtitle = this.add.image(screenCenterX,screenY + 120, "subtitle").setScale(0.65);
-        this.text = this.add.text(screenCenterX,screenY + 300,this.cache.text.get('data'), {fontFamily: 'Arial Black',fontSize: '50px'})
+        this.text = this.add.text(screenCenterX,screenY + 300,this.cache.text.get('data'), {fontFamily: 'sans-serif',fontSize: '50px'})
         .setAlign('center').setOrigin(0.5, 0);
 
-        this.masulloThetiLogo = this.add.bitmapText(screenCenterX, screenY +1000, 'RickAndMorty', 'I.T.C.S.G. Masullo Theti', 100)
+        this.masulloThetiLogo = this.add.bitmapText(screenCenterX, screenY +1030, 'RickAndMorty', 'I.T.C.S.G. Masullo Theti', 100)
         .setAlpha(1)
         .setOrigin(0.5, 0.5)
         .setCenterAlign().setLetterSpacing();
@@ -43,6 +42,8 @@ class Credits extends Phaser.Scene {
         this.subtitle.y -= velocity;
         this.text.y -= velocity;
         this.masulloThetiLogo.y-= velocity;
+        if(this.text.y < -900)
+            this.scene.start("Menu");
 
     }
 }

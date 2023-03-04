@@ -37,7 +37,7 @@ class FireBallGroup extends Phaser.Physics.Arcade.Group
 
         this.createMultiple({
             classType: FireBall,
-            frameQuantity: 30,
+            frameQuantity: 100,
             active: false,
             visible: false,
             key: 'fireball',

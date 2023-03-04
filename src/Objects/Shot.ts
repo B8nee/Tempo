@@ -45,7 +45,27 @@ class Shot extends Phaser.GameObjects.Sprite {
         this._scene.addShot(this);
         this._scene.add.existing(this);
         this._body.allowGravity = false;
-        this._body.setVelocityX(1700).setVelocityY(-1700);
+        this._body.setVelocityX(2000).setVelocityY(-1000);
+    }
+
+    shotEnemy() {
+        this.setScale(1);
+        this.setAlpha(0).setScale(1).setDepth(10);
+        this._scene.tweens.add({
+            targets: this,
+            alpha: 1,
+            scale: 1,
+            duration: 1,
+        });
+        this._scene.addShot(this);
+        this._scene.add.existing(this);
+        this._body.allowGravity = false;
+        this._body.setVelocityX(-1570);
+        this.flipX = true;
+    }
+
+    delay(ms: number) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
     update() {

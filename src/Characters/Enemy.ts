@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import GameScene from '../GameScene';
 import { genericConfig } from '../Other/Types';
 import Animations from '../Animations/Animations';
+import Shot from '../Objects/Shot';
 
 class Enemy extends Phaser.GameObjects.Sprite {
     config: genericConfig;
@@ -12,6 +13,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
     controlloW: boolean = true;
     spawn: boolean = true;
     animations: Animations;
+    shotCounter: number = 0;
 
     constructor(params: genericConfig) {
         super(params.scene, params.x, params.y, params.key);
@@ -25,14 +27,36 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this._body.setDragX(100).setCollideWorldBounds(true, 0.5);
     }
 
-    update() {
-        function delay(ms: number) {
-            return new Promise((resolve) => setTimeout(resolve, ms));
-        }
+    delay(ms: number) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
 
-            if (this.spawn) {
-                this.anims.play("e-walk", true);
-                delay(500).then(() => {
+    shotController() {
+        const duration = Phaser.Math.Between(1000, 1000);
+
+        const shot = new Shot(
+            {
+                scene: this._scene,
+                x: this.x,
+                y: this.y + 39,
+                key: "fireball_spritesheet",
+            }
+        );
+
+        shot.shotEnemy();
+        shot.update();
+
+        this.shotCounter++;
+
+        setTimeout(() => {
+            this.shotCounter--;
+        }, Phaser.Math.Between(2000, 2000));
+    };
+
+    update() {
+        if (this.spawn) {
+            this.anims.play("e-walk", true);
+            this.delay(500).then(() => {
                     this.spawn = false;
                 });  
             } else {
@@ -40,6 +64,12 @@ class Enemy extends Phaser.GameObjects.Sprite {
             }
 
         this._body.setVelocityX(-100);
+
+        if (this.shotCounter < 1) {
+            this.shotController();
+        }
+
+        
     }
 
 }

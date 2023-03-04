@@ -10,8 +10,6 @@ class Commands extends Phaser.Scene {
     mySpaceBar: Phaser.GameObjects.Sprite;
     myArrowDown: Phaser.GameObjects.Sprite;
     myArrowUp: Phaser.GameObjects.Sprite;
-    myArrowLeft: Phaser.GameObjects.Sprite;
-    myArrowRight: Phaser.GameObjects.Sprite;
     myPlayer: Phaser.GameObjects.Sprite;
     myFireball: Phaser.GameObjects.Sprite;
     //group
@@ -64,30 +62,26 @@ class Commands extends Phaser.Scene {
             this.scene.stop("Commands"),
             this.scene.start("Menu")
         })
-        .on("pointerover", () => this.menu.setTint(0xb2df28))
-        .on("pointerout", () => this.menu.setTint(0xffffff));
+        .on("pointerover", () => this.menu.name = "arcade_green")
+        .on("pointerout", () => this.menu.name = "arcade");
 
-        this.mySpaceBar = this.add.sprite(width - commandsBG_width*0.7, 550, 'spacebar', 0).setInteractive();
-        this.add.bitmapText(width - commandsBG_width*0.7 + 56, 540, "arcade", "Shoot", 20);
+        this.mySpaceBar = this.add.sprite(width - commandsBG_width*0.5, height- height/4, 'spacebar', 0).setInteractive();
+        this.add.bitmapText(width - commandsBG_width*0.5 + 30 , (height -height/4)-10, "arcade", "Shoot", 20);
 
         this.myArrowDown = this.add.sprite(width - commandsBG_width * 0.4, 300, 'arrows', 0).setInteractive();
         this.add.bitmapText(width - commandsBG_width * 0.4 + 30, 290, "arcade", "Crouch", 20);
-
-        this.myArrowLeft = this.add.sprite(width - commandsBG_width*0.4, 400, 'arrows', 2).setInteractive();
-        this.add.bitmapText(width - commandsBG_width * 0.4 + 30, 390, "arcade", "Move Left", 20);
-
-        this.myArrowRight = this.add.sprite(width - commandsBG_width, 400, 'arrows', 4).setInteractive();
-        this.add.bitmapText(width - commandsBG_width + 30, 390, "arcade", "Move Right", 20);
 
         this.myArrowUp = this.add.sprite(width - commandsBG_width, 300, 'arrows', 6).setInteractive();
         this.add.bitmapText(width - commandsBG_width + 30, 290, "arcade", "Jump", 20);
 
         
         this.addEvents();
+        this.myPlayer.play("walk", true);
 
         
     }
     update(time: number, delta: number): void {
+        
         if(Phaser.Input.Keyboard.JustDown(this.spaceBar)){
             this.shooting = true;
             this.startAnimation(this.mySpaceBar, this.myPlayer, "spaceBar", "shoot");
@@ -98,9 +92,7 @@ class Commands extends Phaser.Scene {
                 this.shooting = false;
             })
         }
-        if(this.shooting){
-            return;
-        }
+        
         
         if(this.cursorKeys.down.isDown){
             this.myPlayer.play("crouch", true);
@@ -110,24 +102,14 @@ class Commands extends Phaser.Scene {
             this.myPlayer.play("jump", true);
             this.myArrowUp.play("arrowUp", true);
         }
-        else if(this.cursorKeys.left.isDown){
-            this.myPlayer.scaleX = -1;
-            this.myPlayer.play("walk", true);
-            this.myArrowLeft.play("arrowLeft", true);
-        }
-        else if(this.cursorKeys.right.isDown){
-            this.myPlayer.scaleX = 1;
-            this.myPlayer.play("walk", true);
-            this.myArrowRight.play("arrowRight", true);
+
+        else if(this.shooting){
+            return;
         }
         else if(this.eventIsListened == false){
-            this.stopAnimation(this.myArrowRight, this.myPlayer, 4);
+            this.myPlayer.play("walk", true);
             this.myArrowDown.stop();
             this.myArrowDown.setFrame(0);
-            this.myArrowLeft.stop();
-            this.myArrowLeft.setFrame(2);
-            this.myArrowRight.stop();
-            this.myArrowRight.setFrame(4);
             this.myArrowUp.stop();
             this.myArrowUp.setFrame(6);
         }
@@ -152,26 +134,6 @@ class Commands extends Phaser.Scene {
             this.stopAnimation(this.myArrowDown, this.myPlayer, 0);
             this.eventIsListened = false;
         });
-        this.myArrowLeft
-        .on("pointerover", () => {
-            this.myPlayer.scaleX = -1;
-            this.startAnimation(this.myArrowLeft, this.myPlayer, "arrowLeft", "walk");
-            this.eventIsListened = true;
-        })
-        .on("pointerout", () => {
-            this.stopAnimation(this.myArrowLeft, this.myPlayer, 2);
-            this.eventIsListened = false;
-        });
-        this.myArrowRight 
-        .on("pointerover", () => {
-            this.myPlayer.scaleX = 1;
-            this.startAnimation(this.myArrowRight, this.myPlayer, "arrowRight", "walk");
-            this.eventIsListened = true;
-        })
-        .on("pointerout", () => {
-            this.stopAnimation(this.myArrowRight, this.myPlayer, 4);
-            this.eventIsListened = false;
-        })
         this.myArrowUp 
         .on("pointerover", () => {
             this.startAnimation(this.myArrowUp, this.myPlayer, "arrowUp", "jump");
@@ -196,7 +158,7 @@ class Commands extends Phaser.Scene {
     }
 
     stopAnimation(myButton: Phaser.GameObjects.Sprite, myCharacter: Phaser.GameObjects.Sprite, buttonFrame: number){
-        myCharacter.stop();
+        myCharacter.play("walk");
         myCharacter.setFrame(0);
         myButton.stop();
         myButton.setFrame(buttonFrame);

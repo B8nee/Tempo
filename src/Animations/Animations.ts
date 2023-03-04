@@ -120,7 +120,21 @@ class Animations extends Phaser.GameObjects.Container{
             frameRate: 3,
             frames: this.scene.anims.generateFrameNames("fireball_spritesheet", {start: 0, end: 2}),
             repeat: -1,
-        });
+        }),
+
+        this.scene.anims.create({
+            key: "portal",
+            frameRate: 3,
+            frames: this.scene.anims.generateFrameNames("portal", {start: 1, end: 2}),
+            repeat: -1,
+        }),
+
+        this.scene.anims.create({
+            key: "loading",
+            frameRate: 10,
+            frames: this.scene.anims.generateFrameNames("loading", {start: 0, end: 14}),
+            repeat: -1
+        })
     }
 
     createRobotAnimations(){

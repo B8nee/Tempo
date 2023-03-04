@@ -45,6 +45,16 @@ export const GameData: any = {
         xmlpath: "../assets/font/arcade/arcade.xml",
       },
       {
+        name: "arcade_black",
+        imgpath: "../assets/font/arcade/arcade_black.png",
+        xmlpath: "../assets/font/arcade/arcade.xml",
+      },
+      {
+        name: "arcade_green",
+        imgpath: "../assets/font/arcade/arcade_green.png",
+        xmlpath: "../assets/font/arcade/arcade.xml",
+      },
+      {
         name: "RickAndMorty",
         imgpath: "../assets/font/rickandmorty/RickAndMorty.png",
         xmlpath: "../assets/font/rickandmorty/RickAndMorty.fnt",
@@ -111,6 +121,24 @@ export const GameData: any = {
         frameConfig:{
           frameWidth: 32,
           frameHeight: 32,
+        },
+      },
+
+      {
+        name: "portal",
+        path: "../assets/img/gameplay/objects/portale.png",
+        frameConfig:{
+          frameWidth: 142,
+          frameHeight: 142,
+        },
+      },
+
+      {
+        name: "loading",
+        path: "../assets/img/gameplay/background/loading.png",
+        frameConfig:{
+          frameWidth: 1290,
+          frameHeight: 720,
         },
       }
     ],
