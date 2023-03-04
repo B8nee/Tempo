@@ -8,6 +8,7 @@ class Commands extends Phaser.Scene {
     menu: Phaser.GameObjects.BitmapText;
     //sprirte
     mySpaceBar: Phaser.GameObjects.Sprite;
+    myShift: Phaser.GameObjects.Sprite;
     myArrowDown: Phaser.GameObjects.Sprite;
     myArrowUp: Phaser.GameObjects.Sprite;
     myPlayer: Phaser.GameObjects.Sprite;
@@ -62,11 +63,14 @@ class Commands extends Phaser.Scene {
             this.scene.stop("Commands"),
             this.scene.start("Menu")
         })
-        .on("pointerover", () => this.menu.name = "arcade_green")
-        .on("pointerout", () => this.menu.name = "arcade");
+        .on("pointerover", () => this.menu.setFont('arcade_green'))
+        .on("pointerout", () => this.menu.setFont('arcade'));
 
-        this.mySpaceBar = this.add.sprite(width - commandsBG_width*0.5, height- height/4, 'spacebar', 0).setInteractive();
-        this.add.bitmapText(width - commandsBG_width*0.5 + 30 , (height -height/4)-10, "arcade", "Shoot", 20);
+        this.mySpaceBar = this.add.sprite(width*0.6, height- height/4, 'spacebar', 0).setInteractive();
+        this.add.bitmapText(width*0.6 + 50 , (height -height/4)-10, "arcade", "Shoot", 20);
+
+        this.myShift = this.add.sprite(width*0.4, height- height/4, 'arrows', 0).setInteractive();
+        this.add.bitmapText(width*0.4 - 160 , (height -height/4)-10, "arcade", "Shoot Up", 20);
 
         this.myArrowDown = this.add.sprite(width - commandsBG_width * 0.4, 300, 'arrows', 0).setInteractive();
         this.add.bitmapText(width - commandsBG_width * 0.4 + 30, 290, "arcade", "Crouch", 20);

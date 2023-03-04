@@ -29,21 +29,10 @@ class Hud extends Phaser.Scene {
         this.gameScene.events.on('update-score', this.updateScore, this);
         this.gameScene.events.off('decrease-score', this.decreaseScore, this);
         this.gameScene.events.on('decrease-score', this.decreaseScore, this);
+        this.gameScene.events.off('level-up', this.levelUp, this);
+        this.gameScene.events.on('level-up', this.levelUp, this);
 
-        switch(this.level) {
-            case 1:
-                this.anno = 230000000;
-                this.citta = "Pangea";
-                break;
-            case 2:
-                this.anno = 1914;
-                this.citta = "Togoland";
-                break;
-            case 3:
-                this.anno = 2070;
-                this.citta = "Mars";
-                break;
-        }
+        
 
         this.vite = 1;
         this.nemici = 0;
@@ -60,8 +49,37 @@ class Hud extends Phaser.Scene {
         this.tempoText = this.add.bitmapText(50, 120, "arcade", "25").setFontSize(30).setTint(0xFFFFFF).setOrigin(0);
     }
 
+    bossLevel() {
+        this.scene.stop("GameScene");
+        this.scene.start("GameBoss");
+    }
 
     update() {
+        switch(this.level) {
+            case 1:
+                this.anno = 230000000;
+                this.citta = "Pangea";
+                break;
+            case 2:
+                this.anno = 1914;
+                this.citta = "Togoland";
+                this.viteText.setFont("arcade_black");
+                this.nemiciText.setFont("arcade_black");
+                this.tempoText.setFont("arcade_black");
+                break;
+            case 3:
+                this.anno = 2070;
+                this.citta = "Mars";
+                this.viteText.setFont("arcade");
+                this.nemiciText.setFont("arcade");
+                this.tempoText.setFont("arcade");
+                break;
+            case 4:
+                this.bossLevel();
+                break;
+            default:
+                break;
+        }
     }
 
     updateScore(parameters: Array<any>) {
@@ -71,6 +89,10 @@ class Hud extends Phaser.Scene {
     }
 
     decreaseScore(parameters: Array<any>) {
+    }
+
+    levelUp() {
+        this.level++;
     }
 }
 

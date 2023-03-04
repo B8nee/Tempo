@@ -30,8 +30,8 @@ class CharacterSelection extends Phaser.Scene {
         this.menu = this.add.bitmapText(20, 10, 'arcade', 'Menu')
         .setInteractive()
         .on("pointerdown", () => this.scene.start("Menu"))
-        .on("pointerover", () => this.menu.setTint(0x19081b))
-        .on("pointerout", () => this.menu.setTint(0xffffff));
+        .on("pointerover", () => this.menu.setFont("arcade_green"))
+        .on("pointerout", () => this.menu.setFont("arcade"));
         
         this.testoScelta = this.add.bitmapText(this.game.canvas.width/2 - 265, this.game.canvas.height/2 - 245, "arcade", "MAKE YOUR CHOICE!").setDepth(1).setOrigin(0, 0);
 
@@ -48,7 +48,7 @@ class CharacterSelection extends Phaser.Scene {
         }).on("pointerdown", () => {
             this.scelta = "rick_spritesheet";
             this.scene.stop("CharacterSelection");
-            this.scene.start("GameScene", {scelta: this.scelta, level: 1});
+            this.scene.start("GameScene", {scelta: this.scelta, enemy: "dinosaur"});
             this.scene.start("Hud");
             this.scene.bringToTop("Hud");
         });
@@ -62,7 +62,7 @@ class CharacterSelection extends Phaser.Scene {
         }).on("pointerdown", () => {
             this.scelta = "morty_spritesheet";
             this.scene.stop("CharacterSelection");
-            this.scene.start("GameScene", {scelta: this.scelta, level: 1});
+            this.scene.start("GameScene", {scelta: this.scelta, enemy: "dinosaur"});
             this.scene.start("Hud");
             this.scene.bringToTop("Hud");
         });

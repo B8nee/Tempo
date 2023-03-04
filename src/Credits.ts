@@ -16,7 +16,7 @@ class Credits extends Phaser.Scene {
         const screenCenterX = this.cameras.main.width / 2;
         const screenY = this.cameras.main.height;
 
-        this.menu = this.add.bitmapText(20, 10, 'arcade_green', 'Menu')
+        this.menu = this.add.bitmapText(20, 10, 'arcade', 'Menu')
         .setInteractive()
         .on("pointerdown", () => {
             this.scene.start("Menu");

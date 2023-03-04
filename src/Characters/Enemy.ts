@@ -54,16 +54,60 @@ class Enemy extends Phaser.GameObjects.Sprite {
     };
 
     update() {
-        if (this.spawn) {
-            this.anims.play("e-walk", true);
-            this.delay(500).then(() => {
-                    this.spawn = false;
-                });  
-            } else {
-                this.anims.play("e-walk-infinite", true);
+
+        switch (this._scene.level) {
+            case 1:
+                if (this.spawn) {
+                    this.anims.play("e-walk-d", true);
+                    this.delay(500).then(() => {
+                            this.spawn = false;
+                        });  
+                    } else {
+                        this.anims.play("e-walk-infinite-d", true);
+                    }
+
+                this._scene.enemy.setScale(2);
+                this._body.setSize(50, 60, true).setOffset(10, 10);
+                break;
+            case 2:
+                if (this.spawn) {
+                    this.anims.play("e-walk-t", true);
+                    this.delay(500).then(() => {
+                            this.spawn = false;
+                        });  
+                    } else {
+                        this.anims.play("e-walk-infinite-t", true);
+                    }
+                    this._scene.enemy.setScale(2);
+                    this._body.setSize(50, 60, true).setOffset(10, 10);
+                break;
+            case 3:
+                if (this.spawn) {
+                    this.anims.play("e-walk-r", true);
+                    this.delay(500).then(() => {
+                            this.spawn = false;
+                        });  
+                    } else {
+                        this.anims.play("e-walk-infinite-r", true);
+                    }
+                break;
+            default:
+                break;
             }
 
-        this._body.setVelocityX(-100);
+       switch (this._scene.level) {
+            case 1:
+                this._body.setVelocityX(-100);
+                break;
+            case 2:
+                this._body.setVelocityX(-100);
+                break;
+            case 3:
+                this._body.setVelocityX(-100);
+                break;
+            default:
+                break;
+       }
 
         if (this.shotCounter < 1) {
             this.shotController();

@@ -8,6 +8,9 @@ import GameScene from './GameScene';
 import Hud from './Hud';
 import LevelChange from './LevelChange';
 import GameOver from "./GameOver";
+import GameWin from "./GameWin";
+import GameBoss from "./GameBoss";
+
 
 class Main extends Phaser.Scene {
   constructor(config: Phaser.Types.Core.GameConfig) {
@@ -39,7 +42,7 @@ const config = {
     }
   },
 
-  scene: [Main, Preloader, Menu, CharacterSelection, Credits, Commands, GameScene, Hud, LevelChange, GameOver],
+  scene: [Main, Preloader, Menu, CharacterSelection, Credits, Commands, GameScene, Hud, LevelChange, GameOver, GameWin, GameBoss],
 
   input: {
     activePointers: 2,

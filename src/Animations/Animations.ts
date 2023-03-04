@@ -74,7 +74,8 @@ class Animations extends Phaser.GameObjects.Container{
 
         this.createGameAnimations();
         this.createRobotAnimations();
-        
+        this.createDinosaurAnimations();
+        this.createTankAnimations();
     }
 
     createRickAnimations(){
@@ -111,7 +112,8 @@ class Animations extends Phaser.GameObjects.Container{
 
         this.createGameAnimations();
         this.createRobotAnimations();
-        
+        this.createDinosaurAnimations();
+        this.createTankAnimations();
     }
 
     createGameAnimations(){
@@ -139,18 +141,53 @@ class Animations extends Phaser.GameObjects.Container{
 
     createRobotAnimations(){
         this.scene.anims.create({
-            key: "e-walk",
+            key: "e-walk-r",
             frameRate: 6,
-            frames: this.scene.anims.generateFrameNames("robot_spritesheet", {start: 3, end: 0}),
+            frames: this.scene.anims.generateFrameNames("robot", {start: 3, end: 0}),
             repeat: -1,
         }),
 
         this.scene.anims.create({
-            key: "e-walk-infinite",
+            key: "e-walk-infinite-r",
             frameRate: 6,
-            frames: this.scene.anims.generateFrameNames("robot_spritesheet", {start: 0, end: 0}),
+            frames: this.scene.anims.generateFrameNames("robot", {start: 0, end: 0}),
             repeat: -1,
         })
     }
 
-} export default Animations
+    createDinosaurAnimations(){
+        this.scene.anims.create({
+            key: "e-walk-d",
+            frameRate: 6,
+            frames: this.scene.anims.generateFrameNames("dinosaur", {start: 0, end: 3}),
+            repeat: -1,
+        }),
+
+        this.scene.anims.create({
+            key: "e-walk-infinite-d",
+            frameRate: 6,
+            frames: this.scene.anims.generateFrameNames("dinosaur", {start: 2, end: 3}),
+            repeat: -1,
+        })
+    }
+
+    createTankAnimations(){
+        this.scene.anims.create({
+            key: "e-walk-t",
+            frameRate: 6,
+            frames: this.scene.anims.generateFrameNames("tank", {start: 0, end: 3}),
+            repeat: -1,
+        }),
+
+        this.scene.anims.create({
+            key: "e-walk-infinite-t",
+            frameRate: 6,
+            frames: this.scene.anims.generateFrameNames("tank", {start: 2, end: 3}),
+            repeat: -1,
+        })
+    }
+
+
+} 
+
+export default Animations;

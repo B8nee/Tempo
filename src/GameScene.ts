@@ -9,8 +9,9 @@ class GameScene extends Phaser.Scene {
     character: Character;
     animations: Animations;
     base: any;
-    base2: any;
+    // base2: any;
     shotGroup: Phaser.GameObjects.Group;
+    shotGroupEnemy: Phaser.GameObjects.Group;
     enemyGroup: Phaser.GameObjects.Group;
     enemy: Enemy;
     chk: boolean = false;
@@ -20,6 +21,7 @@ class GameScene extends Phaser.Scene {
     contaSpawn: number = 1;
     portale: Phaser.GameObjects.Sprite;
     chkON: boolean = true;
+    selectedEnemy: string;
 
     futuro1: Phaser.GameObjects.TileSprite;
     futuro2: Phaser.GameObjects.TileSprite;
@@ -44,6 +46,7 @@ class GameScene extends Phaser.Scene {
 
     init(data: any) {
         this.selectedCharacter = data.scelta;
+        this.selectedEnemy = data.enemy;
     }
 
     preload() {
@@ -54,28 +57,6 @@ class GameScene extends Phaser.Scene {
         this.chkON = true;
 
         switch(this.level) {
-            case 3:
-                this.futuro1 = this.add.tileSprite(0, 0, 0, 0, 'futuro1').setScale(3.8).setOrigin(0, 0).setDepth(3);
-
-                this.futuro2 = this.add.tileSprite(0, 0, 0, 0, 'futuro2').setScale(5).setOrigin(0, 0).setDepth(1);
-
-                this.futuro3 = this.add.tileSprite(0, 0, 0, 0, 'futuro3').setScale(5).setOrigin(0, 0).setDepth(2);
-
-                break;
-            
-            case 2:
-                this.guerra1 = this.add.tileSprite(0, 0, 0, 0, 'guerra1').setScale(4).setOrigin(0, 0).setDepth(1);
-
-                this.guerra2 = this.add.tileSprite(0, 0, 0, 0, 'guerra2').setScale(4).setOrigin(0, 0).setDepth(2);
-
-                this.guerra3 = this.add.tileSprite(0, 0, 0, 0, 'guerra3').setScale(4).setOrigin(0, 0).setDepth(3);
-
-                this.guerra4 = this.add.tileSprite(0, 0, 0, 0, 'guerra4').setScale(4).setOrigin(0, 0).setDepth(4);
-
-                this.guerra5 = this.add.tileSprite(0, 0, 0, 0, 'guerra5').setScale(4).setOrigin(0, 0).setDepth(5);
-
-                break;
-
             case 1:
                 this.pre1 = this.add.tileSprite(0, 0, 0, 0, 'pre1').setOrigin(0, 0).setDepth(1).setScale(4);
 
@@ -85,8 +66,36 @@ class GameScene extends Phaser.Scene {
 
                 this.pre4 = this.add.tileSprite(0, 0, 0, 0, 'pre4').setOrigin(0, 0).setDepth(4).setScale(4);
 
+                this.selectedEnemy = 'dinosaur';
+
                 break;
-            
+
+            case 2:
+                this.guerra1 = this.add.tileSprite(0, 0, 0, 0, 'guerra1').setScale(4).setOrigin(0, 0).setDepth(1);
+
+                this.guerra2 = this.add.tileSprite(0, 0, 0, 0, 'guerra2').setScale(4).setOrigin(0, 0).setDepth(2);
+    
+                this.guerra3 = this.add.tileSprite(0, 0, 0, 0, 'guerra3').setScale(4).setOrigin(0, 0).setDepth(3);
+    
+                this.guerra4 = this.add.tileSprite(0, 0, 0, 0, 'guerra4').setScale(4).setOrigin(0, 0).setDepth(4);
+    
+                this.guerra5 = this.add.tileSprite(0, 0, 0, 0, 'guerra5').setScale(4).setOrigin(0, 0).setDepth(5);
+    
+                this.selectedEnemy = "tank";
+    
+                break;
+
+            case 3:
+                this.futuro1 = this.add.tileSprite(0, 0, 0, 0, 'futuro1').setScale(3.8).setOrigin(0, 0).setDepth(3);
+
+                this.futuro2 = this.add.tileSprite(0, 0, 0, 0, 'futuro2').setScale(5).setOrigin(0, 0).setDepth(1);
+
+                this.futuro3 = this.add.tileSprite(0, 0, 0, 0, 'futuro3').setScale(5).setOrigin(0, 0).setDepth(2);
+
+                this.selectedEnemy = "robot";
+
+                break;
+
             default:
                 break;
         }
@@ -104,10 +113,12 @@ class GameScene extends Phaser.Scene {
 
         this.enemy = new Enemy({
             scene: this,
-            x: 1300,
+            x: 1100,
             y: 606,
-            key: 'robot_spritesheet',
+            key: this.selectedEnemy,
         }).setDepth(100);
+
+        console.log(this.selectedEnemy);
 
         this.character = this.physics.add.existing(this.character);
 
@@ -122,12 +133,12 @@ class GameScene extends Phaser.Scene {
         );
 
         this.base = this.physics.add.staticGroup();
-        this.base2 = this.physics.add.staticGroup();
+        // this.base2 = this.physics.add.staticGroup();
 
         this.base.create(0, 975, 'base').setScale(0);
         this.base.create(1280, 975, 'base').setScale(0);
 
-        this.base.create(640, 600, 'base2').setScale(0);
+        // this.base.create(640, 600, 'base2').setScale(0);
 
 
         this.physics.add.collider(this.character, this.base);
@@ -214,31 +225,16 @@ class GameScene extends Phaser.Scene {
                 this
             );
 
-            this.contaSpawn = 3;
         }
 
-        if (this.contaSpawn == 0) {
-            // this.delay(Phaser.Math.Between(1000, 5000)).then(() => {
-                this.addEnemy(new Enemy({
+            this.delay(Phaser.Math.Between(1000, 3000)).then(() => {
+                this.addEnemy(this.enemy = new Enemy({
                     scene: this,
-                    x: 1300,
-                    y: 550,
-                    key: 'robot_spritesheet',
+                    x: 1100,
+                    y: 606,
+                    key: this.selectedEnemy,
                 }).setDepth(100));
-            // });
-            this.contaSpawn = 1;
-        } else if (this.contaSpawn == 1) {
-            // this.delay(Phaser.Math.Between(3000, 5000)).then(() => {
-                this.addEnemy(new Enemy({
-                    scene: this,
-                    x: 1400,
-                    y: 350,
-                    key: 'robot_spritesheet',
-                }).setDepth(100));
-            // });
-
-            this.contaSpawn = 0;
-        }
+            });
 
         this.events.emit("update-score", [1]);
     }
@@ -249,7 +245,7 @@ class GameScene extends Phaser.Scene {
         if(this.contVite == 2){
             this.removeEnemy(enemy);
             this.contVite = 0;
-        }
+    }
     }
 
     hitCharacter() {
@@ -265,6 +261,7 @@ class GameScene extends Phaser.Scene {
     hitPortal() {
         this.chkON = false;
         this.level++;
+        this.events.emit("level-up", [this.level]);
         this.scene.stop('GameScene');
         this.scene.start('LevelChange', {level: this.level, selectedCharacter: this.selectedCharacter});
     }
@@ -308,3 +305,4 @@ class GameScene extends Phaser.Scene {
 }
 
 export default GameScene;
+

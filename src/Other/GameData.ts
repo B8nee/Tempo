@@ -7,11 +7,12 @@ export const GameData: any = {
         { name: "base", path: "../assets/img/gameplay/general/base.png" },
         { name: "base2", path: "../assets/img/gameplay/general/base2.png" },
 
-        // Menu Images
+        // Menu Images#
         { name: "menu", path: "../assets/img/menu/menu.png" },
         { name: "title", path: "../assets/img/menu/title.png" },
         { name: "subtitle", path: "../assets/img/menu/subtitle.png" },
         { name: "dino", path: "../assets/img/gameplay/background/dino.jpg" },
+        { name: "gameover", path: "../assets/img/gameplay/background/gameover.png" },
 
         // Level Images
         { name: "futuro1", path: "../assets/img/gameplay/level3/futuro1.png" },
@@ -107,8 +108,8 @@ export const GameData: any = {
       },
 
       {
-        name: "robot_spritesheet",
-        path: "../assets/img/gameplay/characters/robot_spritesheet.png",
+        name: "robot",
+        path: "../assets/img/gameplay/characters/robot.png",
         frameConfig:{
           frameWidth: 192.5,
           frameHeight: 216,
@@ -140,6 +141,33 @@ export const GameData: any = {
           frameWidth: 1290,
           frameHeight: 720,
         },
+      },
+
+      {
+        name: "tank",
+        path: "../assets/img/gameplay/characters/tank.png",
+        frameConfig:{
+          frameWidth: 68,
+          frameHeight: 50,
+        },
+      },
+
+      {
+        name: "dinosaur",
+        path: "../assets/img/gameplay/characters/dinosaur.png",
+        frameConfig:{
+          frameWidth: 65,
+          frameHeight: 67,
+        }
+      },
+
+      {
+        name: "plane",
+        path: "../assets/img/gameplay/characters/plane.png",
+        frameConfig:{
+          frameWidth: 83,
+          frameHeight: 49,
+        },
       }
-    ],
+    ]
   };

@@ -21,17 +21,17 @@ class Menu extends Phaser.Scene {
         this.play = this.add.bitmapText(this.game.canvas.width/2 - 63, this.game.canvas.height/2 + 40, "arcade", "PLAY").setInteractive().on("pointerdown", () => {
             this.scene.stop("Menu"),
             this.scene.start("CharacterSelection")
-        }).on("pointerover", () => this.commands.name = 'arcade_green').on("pointerout", () => this.commands.name = 'arcade');
+        }).on("pointerover", () => this.play.setFont('arcade_green')).on("pointerout", () => this.play.setFont('arcade'));
 
         this.commands = this.add.bitmapText(this.game.canvas.width/2 - 129, this.game.canvas.height/2 + 120, "arcade", "COMMANDS").setInteractive().on("pointerdown", () => {
             this.scene.stop("Menu"),
             this.scene.start("Commands")
-        }).on("pointerover", () => this.commands.name = 'arcade_green').on("pointerout", () => this.commands.name = 'arcade');
+        }).on("pointerover", () => this.commands.setFont('arcade_green')).on("pointerout", () => this.commands.setFont('arcade'));
 
         this.credits = this.add.bitmapText(this.game.canvas.width/2 - 113, this.game.canvas.height/2 + 200, "arcade", "CREDITS").setInteractive().on("pointerdown", () => {
             this.scene.stop("Menu"),
             this.scene.start("Credits")
-        }).on("pointerover", () => this.commands.name = 'arcade_green').on("pointerout", () => this.commands.name = 'arcade');
+        }).on("pointerover", () => this.credits.setFont('arcade_green')).on("pointerout", () => this.credits.setFont('arcade'));
     }
 }
 
