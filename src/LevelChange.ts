@@ -10,7 +10,7 @@ class LevelChange extends Phaser.Scene {
     } 
 
     init(data: any) {
-        this.selectedCharacter = data.scelta;
+        this.selectedCharacter = data.selectedCharacter;
         this.level = data.level;
     }
     
@@ -20,6 +20,7 @@ class LevelChange extends Phaser.Scene {
         this.scene.bringToTop("LevelChange");
         this.background = this.add.sprite(0, 0, "loading").setOrigin(0, 0).setDepth(2);
         this.background.play("loading");
+        console.log(this.selectedCharacter);
         this.delay(3000).then(() => {
             this.scene.start("GameScene", { scelta: this.selectedCharacter, level: this.level });
             this.scene.bringToTop("Hud");

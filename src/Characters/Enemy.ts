@@ -54,6 +54,29 @@ class Enemy extends Phaser.GameObjects.Sprite {
         
     };
 
+    shotController2() {
+        if (this._scene.contNem > 11) {
+            const shot = new Shot(
+                {
+                    scene: this._scene,
+                    x: this.x,
+                    y: this.y + 39,
+                    key: "fireball_spritesheet",
+                }
+            );
+    
+            shot.shotEnemy();
+            shot.update();
+    
+            this.shotCounter++;
+    
+            setTimeout(() => {
+                this.shotCounter--;
+            }, Phaser.Math.Between(2000, 2000));
+        }
+        
+    };
+
     update() {
 
         switch (this._scene.level) {
@@ -99,6 +122,14 @@ class Enemy extends Phaser.GameObjects.Sprite {
                     } else {
                         this.anims.play("e-walk-infinite-r", true);
                     }
+
+                    if (this._scene.contNem < 11) {
+                        return;
+                    } else {
+                        if (this.shotCounter < 1) {
+                            this.shotController2();
+                        }
+                    }
                 break;
             default:
                 break;
@@ -106,13 +137,13 @@ class Enemy extends Phaser.GameObjects.Sprite {
 
        switch (this._scene.level) {
             case 1:
-                this._body.setVelocityX(-100);
+                this._body.setVelocityX(-500);
                 break;
             case 2:
                 this._body.setVelocityX(-100);
                 break;
             case 3:
-                this._body.setVelocityX(-100);
+                this._body.setVelocityX(-250);
                 break;
             default:
                 break;

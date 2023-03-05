@@ -3,6 +3,7 @@ import Animations from './Animations/Animations';
 import Character from './Characters/Character';
 import Shot from './Objects/Shot';
 import Enemy from './Characters/Enemy';
+import CharacterSelection from './CharacterSelection';
 
 class GameScene extends Phaser.Scene {
     selectedCharacter: string;
@@ -24,6 +25,9 @@ class GameScene extends Phaser.Scene {
     selectedEnemy: string;
     cntSpw: number = 0;
     contNem: number = 0;
+
+    chaSel: CharacterSelection;
+    chkSel: boolean = true;
 
     futuro1: Phaser.GameObjects.TileSprite;
     futuro2: Phaser.GameObjects.TileSprite;
@@ -48,13 +52,18 @@ class GameScene extends Phaser.Scene {
 
     init(data: any) {
         this.selectedCharacter = data.scelta;
-        this.selectedEnemy = data.enemy;
     }
 
     preload() {
     }
 
     create() {
+        if (this.chkSel) {
+            this.chaSel = <CharacterSelection>this.scene.get('CharacterSelection');
+            this.level = this.chaSel.level;
+            this.chkSel = false;
+            this.events.emit('reset', this.level);
+        }
 
         this.chkON = true;
 
@@ -270,13 +279,17 @@ class GameScene extends Phaser.Scene {
     hitEnemy(shot: any, enemy: any) {
         this.contVite++;
         this.removeShot(shot);
-        if(this.contVite == 2){
+        if(this.contVite == 3){
             this.removeEnemy(enemy);
             this.contVite = 0;
         }
     }
 
     hitCharacter() {
+        this.cntSpw = 0;
+        this.contNem = 0;
+        this.chkSel = true;
+        this.events.emit('reset');
         this.scene.stop('GameScene');
         this.scene.stop('Hud');
         this.scene.start('GameOver');
@@ -326,7 +339,7 @@ class GameScene extends Phaser.Scene {
         }
 
         if (this.portale != null) {
-            this.portale.x -= 1;
+            this.portale.x -= 2;
         }
 
     }

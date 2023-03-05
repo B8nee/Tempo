@@ -36,59 +36,117 @@ class Character extends Phaser.GameObjects.Sprite {
             return new Promise((resolve) => setTimeout(resolve, ms));
         }
 
-        if (this.cursors.up.isDown && this._body.blocked.down) {
-            this.anims.play("jump", true);
-            this._body.setVelocityY(-500);
-            delay(500).then(() => {
-                this._body.setVelocityY(0);
-            })
-            this.controlloW = false;
-        } else if (this.cursors.down.isDown) {
-            this.anims.play("crouch", true);
-            this.controlloW = false;
-        } else {
-            
-            if (this.spawn) {
-                this.anims.play("spawn", true);
+        if(this._scene.selectedCharacter == "rick_spritesheet") {
+            if (this.cursors.up.isDown && this._body.blocked.down) {
+                this.anims.play("jump", true);
+                this._body.setVelocityY(-500);
                 delay(500).then(() => {
-                    this.spawn = false;
-                    this.controlloW = false;
-                });  
+                    this._body.setVelocityY(0);
+                })
+                this.controlloW = false;
+            } else if (this.cursors.down.isDown) {
+                this.anims.play("crouch", true);
+                this.controlloW = false;
             } else {
-                this.anims.play("walk", true);
-                this.controlloW = true;
+                
+                if (this.spawn) {
+                    this.anims.play("spawn", true);
+                    delay(500).then(() => {
+                        this.spawn = false;
+                        this.controlloW = false;
+                    });  
+                } else {
+                    this.anims.play("walk", true);
+                    this.controlloW = true;
+                }
             }
-        }
-
-        if (Phaser.Input.Keyboard.JustDown(this.cursors.space)) {
-            if (this.controlloW) {
-                this.anims.play("shoot", true);
-                const shot = new Shot(
-                    {
-                        scene: this._scene,
-                        x: this.x,
-                        y: this.y,
-                        key: "fireball_spritesheet",
-                    }
-                );
-                shot.create();
-                shot.update();
+    
+            if (Phaser.Input.Keyboard.JustDown(this.cursors.space)) {
+                if (this.controlloW) {
+                    this.anims.play("shoot", true);
+                    const shot = new Shot(
+                        {
+                            scene: this._scene,
+                            x: this.x,
+                            y: this.y,
+                            key: "fireball_spritesheet",
+                        }
+                    );
+                    shot.create();
+                    shot.update();
+                }
             }
-        }
-
-        if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
-            if (this.controlloW) {
-                this.anims.play("shoot", true);
-                const shot = new Shot(
-                    {
-                        scene: this._scene,
-                        x: this.x,
-                        y: this.y,
-                        key: "fireball_spritesheet",
-                    }
-                );
-                shot.shotObliq();
-                shot.update();
+    
+            if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
+                if (this.controlloW) {
+                    this.anims.play("shoot", true);
+                    const shot = new Shot(
+                        {
+                            scene: this._scene,
+                            x: this.x,
+                            y: this.y,
+                            key: "fireball_spritesheet",
+                        }
+                    );
+                    shot.shotObliq();
+                    shot.update();
+                }
+            }
+        } else {
+            if (this.cursors.up.isDown && this._body.blocked.down) {
+                this.anims.play("jump-m", true);
+                this._body.setVelocityY(-500);
+                delay(500).then(() => {
+                    this._body.setVelocityY(0);
+                })
+                this.controlloW = false;
+            } else if (this.cursors.down.isDown) {
+                this.anims.play("crouch-m", true);
+                this.controlloW = false;
+            } else {
+                
+                if (this.spawn) {
+                    this.anims.play("spawn-m", true);
+                    delay(500).then(() => {
+                        this.spawn = false;
+                        this.controlloW = false;
+                    });  
+                } else {
+                    this.anims.play("walk-m", true);
+                    this.controlloW = true;
+                }
+            }
+    
+            if (Phaser.Input.Keyboard.JustDown(this.cursors.space)) {
+                if (this.controlloW) {
+                    this.anims.play("shoot-m", true);
+                    const shot = new Shot(
+                        {
+                            scene: this._scene,
+                            x: this.x,
+                            y: this.y,
+                            key: "fireball_spritesheet",
+                        }
+                    );
+                    shot.create();
+                    shot.update();
+                }
+            }
+    
+            if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
+                if (this.controlloW) {
+                    this.anims.play("shoot-m", true);
+                    const shot = new Shot(
+                        {
+                            scene: this._scene,
+                            x: this.x,
+                            y: this.y,
+                            key: "fireball_spritesheet",
+                        }
+                    );
+                    shot.shotObliq();
+                    shot.update();
+                }
             }
         }
     }

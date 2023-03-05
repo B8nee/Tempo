@@ -40,6 +40,8 @@ class Hud extends Phaser.Scene {
         this.gameScene.events.on('update-year', this.updateYear, this);
         this.gameScene.events.off('update-time', this.updateTime, this);
         this.gameScene.events.on('update-time', this.updateTime, this);
+        this.gameScene.events.off('reset', this.reset, this);
+        this.gameScene.events.on('reset', this.reset, this);
 
         this.vite = 1;
         this.nemici = 0;
@@ -134,6 +136,17 @@ class Hud extends Phaser.Scene {
         this.nemici += parameters[0];
         this.nemiciText.setText(this.nemici + "");
         this.registry.set("nemici", this.nemici)
+    }
+
+    reset (){
+        this.level = 1;
+        this.nemici = 0;
+        this.nemiciText.setText(this.nemici + "");
+        this.registry.set("nemici", this.nemici);
+
+        this.tempo = 25;
+        this.tempoText.setText(this.tempo + "");
+        this.registry.set("tempo", this.tempo);
     }
 
     decreaseScore(parameters: Array<any>) {

@@ -180,6 +180,15 @@ export const GameData: any = {
           frameWidth: 32,
           frameHeight: 32,
         },
+      },
+
+      {
+        name: "boss",
+        path: "../assets/img/gameplay/characters/boss.png",
+        frameConfig:{
+          frameWidth: 71,
+          frameHeight: 62,
+        },
       }
     ]
   };

@@ -9,6 +9,7 @@ class CharacterSelection extends Phaser.Scene {
     testoScelta: Phaser.GameObjects.BitmapText;
     menu: Phaser.GameObjects.BitmapText;
     scelta: String;
+    level: number;
     
     constructor() {
         super({ key: "CharacterSelection" });
@@ -19,6 +20,9 @@ class CharacterSelection extends Phaser.Scene {
 
 
     create() {
+
+        this.level = 1;
+
         this.dinosaurbg = this.add.image(0, 0, "dino");
         this.dinosaurbg.setOrigin(0, 0);
 
@@ -48,7 +52,7 @@ class CharacterSelection extends Phaser.Scene {
         }).on("pointerdown", () => {
             this.scelta = "rick_spritesheet";
             this.scene.stop("CharacterSelection");
-            this.scene.start("GameScene", {scelta: this.scelta, enemy: "dinosaur"});
+            this.scene.start("GameScene", {scelta: this.scelta});
             this.scene.start("Hud");
             this.scene.bringToTop("Hud");
         });
@@ -62,7 +66,7 @@ class CharacterSelection extends Phaser.Scene {
         }).on("pointerdown", () => {
             this.scelta = "morty_spritesheet";
             this.scene.stop("CharacterSelection");
-            this.scene.start("GameScene", {scelta: this.scelta, enemy: "dinosaur"});
+            this.scene.start("GameScene", {scelta: this.scelta});
             this.scene.start("Hud");
             this.scene.bringToTop("Hud");
         });

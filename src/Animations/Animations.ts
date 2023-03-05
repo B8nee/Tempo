@@ -47,32 +47,32 @@ class Animations extends Phaser.GameObjects.Container{
 
     createMortyAnimations(){
         this.scene.anims.create({
-            key: "spawn",
+            key: "spawn-m",
             frameRate: 6,
             frames:this.scene.anims.generateFrameNames("morty_spritesheet", {start: 4, end: 7}),
             repeat: 0,
         });
         this.scene.anims.create({
-            key: "walk",
+            key: "walk-m",
             frameRate: 6,
             frames:this.scene.anims.generateFrameNames("morty_spritesheet", {start: 8, end: 11}),
             repeat: -1
         });
         this.scene.anims.create({
-            key: "jump",
+            key: "jump-m",
             frameRate: 6,
             frames:this.scene.anims.generateFrameNames("morty_spritesheet", {start: 12, end: 15}),
             repeat: 0,
         });
         this.scene.anims.create({
-            key: "crouch",
+            key: "crouch-m",
             frameRate: 6,
             frames:this.scene.anims.generateFrameNames("morty_spritesheet", {start: 16, end: 19}),
             repeat: -1,
             repeatDelay: 100,           
         });
         this.scene.anims.create({
-            key: "shoot",
+            key: "shoot-m",
             frameRate: 6,
             frames:this.scene.anims.generateFrameNames("morty_spritesheet", {start: 20, end: 23}),
             repeat: 0,           
@@ -120,6 +120,7 @@ class Animations extends Phaser.GameObjects.Container{
         this.createRobotAnimations();
         this.createDinosaurAnimations();
         this.createTankAnimations();
+        this.createBossAnimations();
     }
 
     createGameAnimations(){
@@ -191,6 +192,22 @@ class Animations extends Phaser.GameObjects.Container{
             frames: this.scene.anims.generateFrameNames("tank", {start: 2, end: 3}),
             repeat: -1,
         })
+    }
+
+        createBossAnimations(){
+            this.scene.anims.create({
+                key: "idle",
+                frameRate: 6,
+                frames: this.scene.anims.generateFrameNames("boss", {start: 0, end: 0}),
+                repeat: -1,
+            }),
+    
+            this.scene.anims.create({
+                key: "walk",
+                frameRate: 6,
+                frames: this.scene.anims.generateFrameNames("boss", {start: 1, end: 4}),
+                repeat: -1,
+            })
     }
 
 
