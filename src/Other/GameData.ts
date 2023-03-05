@@ -13,6 +13,7 @@ export const GameData: any = {
         { name: "subtitle", path: "../assets/img/menu/subtitle.png" },
         { name: "dino", path: "../assets/img/gameplay/background/dino.jpg" },
         { name: "gameover", path: "../assets/img/gameplay/background/gameover.png" },
+        { name: "gamewin", path: "../assets/img/gameplay/background/gamewin.png" },
 
         // Level Images
         { name: "futuro1", path: "../assets/img/gameplay/level3/futuro1.png" },
@@ -37,6 +38,8 @@ export const GameData: any = {
         // Objects
         { name: "skull", path: "../assets/img/gameplay/objects/skull.png" },
         { name: "time", path: "../assets/img/gameplay/objects/time.png" },
+        { name: "world", path: "../assets/img/gameplay/objects/world.png" },
+        { name: "day", path: "../assets/img/gameplay/objects/day.png" }
     ],
 
     bitmapfont: [
@@ -147,7 +150,7 @@ export const GameData: any = {
         name: "tank",
         path: "../assets/img/gameplay/characters/tank.png",
         frameConfig:{
-          frameWidth: 68,
+          frameWidth: 73,
           frameHeight: 50,
         },
       },
@@ -156,7 +159,7 @@ export const GameData: any = {
         name: "dinosaur",
         path: "../assets/img/gameplay/characters/dinosaur.png",
         frameConfig:{
-          frameWidth: 65,
+          frameWidth: 67,
           frameHeight: 67,
         }
       },
@@ -167,6 +170,15 @@ export const GameData: any = {
         frameConfig:{
           frameWidth: 83,
           frameHeight: 49,
+        },
+      },
+
+      {
+        name: "shift",
+        path: "../assets/img/commands/shift.png",
+        frameConfig:{
+          frameWidth: 32,
+          frameHeight: 32,
         },
       }
     ]

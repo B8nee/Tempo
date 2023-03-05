@@ -1,23 +1,22 @@
-class GameBoss extends Phaser.Scene {
+import Phaser from "phaser";
 
-    boss: Phaser.GameObjects.Sprite;
+class GameBoss extends Phaser.Scene {
+    background: Phaser.GameObjects.Image;
+    base: any;
 
     constructor() {
         super({ key: 'GameBoss' });
     }
 
     create(){
-        this.boss = this.add.sprite(400, 300, 'boss').setOrigin(0.5, 0.5);
-        this.boss.setScale(0.5);
+        this.background = this.add.image(0, 0, 'dino').setOrigin(0, 0);
+        this.base = this.physics.add.staticGroup();
+        this.base.create(0, 975, 'base').setScale(0, 0);
+        this.base.create(1280, 975, 'base').setScale(0, 0);
     }
 
 
 }
 
 export default GameBoss;
-
-
-// creare un enemy aereo con uno sparo diverso 
-// boss
-
 

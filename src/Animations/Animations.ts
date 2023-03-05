@@ -35,6 +35,12 @@ class Animations extends Phaser.GameObjects.Container{
             frames: this.scene.anims.generateFrameNumbers("spacebar", { start: 0, end: 1 }),
             repeat: -1
         });
+        this.scene.anims.create({
+            key: "shift",
+            frameRate: 1,
+            frames: this.scene.anims.generateFrameNumbers("shift", { start: 0, end: 1 }),
+            repeat: -1
+        });
         this.createMortyAnimations();
         
     }
@@ -175,7 +181,7 @@ class Animations extends Phaser.GameObjects.Container{
         this.scene.anims.create({
             key: "e-walk-t",
             frameRate: 6,
-            frames: this.scene.anims.generateFrameNames("tank", {start: 0, end: 3}),
+            frames: this.scene.anims.generateFrameNames("tank", {start: 1, end: 3}),
             repeat: -1,
         }),
 

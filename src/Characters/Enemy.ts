@@ -32,25 +32,26 @@ class Enemy extends Phaser.GameObjects.Sprite {
     }
 
     shotController() {
-        const duration = Phaser.Math.Between(1000, 1000);
-
-        const shot = new Shot(
-            {
-                scene: this._scene,
-                x: this.x,
-                y: this.y + 39,
-                key: "fireball_spritesheet",
-            }
-        );
-
-        shot.shotEnemy();
-        shot.update();
-
-        this.shotCounter++;
-
-        setTimeout(() => {
-            this.shotCounter--;
-        }, Phaser.Math.Between(2000, 2000));
+        if (this._scene.contNem > 6) {
+            const shot = new Shot(
+                {
+                    scene: this._scene,
+                    x: this.x,
+                    y: this.y + 39,
+                    key: "fireball_spritesheet",
+                }
+            );
+    
+            shot.shotEnemy();
+            shot.update();
+    
+            this.shotCounter++;
+    
+            setTimeout(() => {
+                this.shotCounter--;
+            }, Phaser.Math.Between(2000, 2000));
+        }
+        
     };
 
     update() {
@@ -78,8 +79,16 @@ class Enemy extends Phaser.GameObjects.Sprite {
                     } else {
                         this.anims.play("e-walk-infinite-t", true);
                     }
-                    this._scene.enemy.setScale(2);
-                    this._body.setSize(50, 60, true).setOffset(10, 10);
+                    this._scene.enemy.setScale(3);
+                    this._body.setSize(45, 20, true).setOffset(5, 30);
+
+                    if (this._scene.contNem < 6) {
+                        return;
+                    } else {
+                        if (this.shotCounter < 1) {
+                            this.shotController();
+                        }
+                    }
                 break;
             case 3:
                 if (this.spawn) {
@@ -109,11 +118,6 @@ class Enemy extends Phaser.GameObjects.Sprite {
                 break;
        }
 
-        if (this.shotCounter < 1) {
-            this.shotController();
-        }
-
-        
     }
 
 }

@@ -1,25 +1,39 @@
-class GameWin extends Phaser.Scene{
-    bgWin: Phaser.GameObjects.Image;
+class GameWin extends Phaser.Scene {
+  background: Phaser.GameObjects.Image;
+  menu: Phaser.GameObjects.BitmapText;
+  restart: Phaser.GameObjects.BitmapText;
 
-    constructor(){
-        super({
-            key: "GameWin"
-        })
-    }
+  constructor() {
+    super({
+      key: "GameWin",
+    });
+  }
 
-    async preload() {
-        this.bgWin = this.add.image(
-          this.game.canvas.width / 2,
-          this.game.canvas.height / 2,
-          "winbg"
-        );
-    
-        this.scene.stop("GameScene");
-        this.scene.stop("Hud");
-      }
-    
-      async create() {
-      }
-    }
+  async preload() {}
 
+  async create() {
+    this.background = this.add.image(0, 0, "gamewin").setOrigin(0, 0);
+
+    this.menu = this.add
+      .bitmapText(1280 / 2, 600, "arcade", "Ritorna al Menu")
+      .setAlpha(1)
+      .setOrigin(0.5)
+      .setInteractive()
+      .setDepth(100)
+      .on("pointerdown", async () => {
+        this.goMenu();
+      })
+      .on("pointerover", () => {
+        this.restart;
+      })
+      .on("pointerout", () => {
+        this.restart;
+      });
+  }
+
+  async goMenu() {
+    this.scene.stop("GameScene");
+    this.scene.start("Menu");
+  }
+}
 export default GameWin;

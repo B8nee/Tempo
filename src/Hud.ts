@@ -3,8 +3,10 @@ import GameScene from './GameScene';
 class Hud extends Phaser.Scene {
     annoText: Phaser.GameObjects.BitmapText;
     anno: number;
+    annoImg: Phaser.GameObjects.Image;
     cittaText: Phaser.GameObjects.BitmapText;
     citta: string;
+    cittaImg: Phaser.GameObjects.Image;
     viteText: Phaser.GameObjects.BitmapText;
     vite: number;
     viteSprite: Phaser.GameObjects.Sprite;
@@ -16,6 +18,9 @@ class Hud extends Phaser.Scene {
     tempoImg: Phaser.GameObjects.Image;
     gameScene: GameScene;
     level: number = 1;
+    timer: Phaser.Time.TimerEvent;
+    checkTimer: boolean = false;
+    checkTimer2: boolean = false;
 
     constructor() {
         super({ key: "Hud"});
@@ -31,8 +36,10 @@ class Hud extends Phaser.Scene {
         this.gameScene.events.on('decrease-score', this.decreaseScore, this);
         this.gameScene.events.off('level-up', this.levelUp, this);
         this.gameScene.events.on('level-up', this.levelUp, this);
-
-        
+        this.gameScene.events.off('update-year', this.updateYear, this);
+        this.gameScene.events.on('update-year', this.updateYear, this);
+        this.gameScene.events.off('update-time', this.updateTime, this);
+        this.gameScene.events.on('update-time', this.updateTime, this);
 
         this.vite = 1;
         this.nemici = 0;
@@ -47,25 +54,47 @@ class Hud extends Phaser.Scene {
 
         this.tempoImg = this.add.image(2, 117, "time").setOrigin(0).setScale(0.4);
         this.tempoText = this.add.bitmapText(50, 120, "arcade", "25").setFontSize(30).setTint(0xFFFFFF).setOrigin(0);
+
+        this.annoImg = this.add.image(1080, 17, "day").setOrigin(0).setScale(1);
+        this.annoText = this.add.bitmapText(1125, 17, "arcade", "23000").setFontSize(30).setTint(0xFFFFFF).setOrigin(0);
+
+        this.cittaImg = this.add.image(1070, 60, "world").setOrigin(0).setScale(0.1);
+        this.cittaText = this.add.bitmapText(1125, 70, "arcade", "Pangea").setFontSize(25).setTint(0xFFFFFF).setOrigin(0);
+
+        this.timer = this.time.addEvent({
+            delay: 25000,
+            paused: false
+        });
     }
 
     bossLevel() {
-        this.scene.stop("GameScene");
+        this.scene.remove("GameScene");
         this.scene.start("GameBoss");
+    }
+
+    updateTime() {
+        this.checkTimer = true;
     }
 
     update() {
         switch(this.level) {
             case 1:
-                this.anno = 230000000;
+                this.anno = 23000;
                 this.citta = "Pangea";
-                break;
-            case 2:
-                this.anno = 1914;
-                this.citta = "Togoland";
                 this.viteText.setFont("arcade_black");
                 this.nemiciText.setFont("arcade_black");
                 this.tempoText.setFont("arcade_black");
+                this.annoText.setFont("arcade_black");
+                this.cittaText.setFont("arcade_black");
+                break;
+            case 2:
+                this.anno = 1945;
+                this.citta = "Togo";
+                this.viteText.setFont("arcade_black");
+                this.nemiciText.setFont("arcade_black");
+                this.tempoText.setFont("arcade_black");
+                this.annoText.setFont("arcade_black");
+                this.cittaText.setFont("arcade_black");
                 break;
             case 3:
                 this.anno = 2070;
@@ -73,12 +102,31 @@ class Hud extends Phaser.Scene {
                 this.viteText.setFont("arcade");
                 this.nemiciText.setFont("arcade");
                 this.tempoText.setFont("arcade");
+                this.annoText.setFont("arcade");
+                this.cittaText.setFont("arcade");
                 break;
             case 4:
                 this.bossLevel();
                 break;
             default:
                 break;
+        }
+
+        this.tempoText.setText(this.timer.getRemainingSeconds().toFixed(0));
+        
+        if (this.timer.getRemainingSeconds() <= 0) {
+            this.timer.paused = true;
+            this.scene.stop("GameScene");
+            this.scene.start("GameOver");
+        }
+
+        if (this.checkTimer) {
+            this.timer.paused = true;
+            this.timer = this.time.addEvent({
+                delay: this.timer.delay + 2000,
+                paused: false
+            });
+            this.checkTimer = false;
         }
     }
 
@@ -93,6 +141,41 @@ class Hud extends Phaser.Scene {
 
     levelUp() {
         this.level++;
+        this.updateYear();
+    }
+
+    updateYear() {
+        switch (this.level) {
+            case 1:
+                this.anno = 23000;
+                this.annoText.setText(this.anno + "");
+                this.registry.set("anno", this.anno);
+
+                this.citta = "Pangea";
+                this.cittaText.setText(this.citta);
+                this.registry.set("citta", this.citta);
+                break;
+            case 2:
+                this.anno = 1945;
+                this.annoText.setText(this.anno + "");
+                this.registry.set("anno", this.anno);
+
+                this.citta = "Togo";
+                this.cittaText.setText(this.citta);
+                this.registry.set("citta", this.citta);
+                break;
+            case 3:
+                this.anno = 2070;
+                this.annoText.setText(this.anno + "");
+                this.registry.set("anno", this.anno);
+
+                this.citta = "Mars";
+                this.cittaText.setText(this.citta);
+                this.registry.set("citta", this.citta);
+                break;
+            default:
+                break;
+        }
     }
 }
 

@@ -22,16 +22,12 @@ class GameOver extends Phaser.Scene {
           .setOrigin(0.5)
           .setInteractive()
           .setDepth(100)
-          .setTint(0x33cc33)
           .on("pointerup", async () => {
-            this.restart.removeInteractive();
             this.restartGame();
           })
           .on("pointerover", () => {
-            this.restart.setTint(0x009933);
           })
           .on("pointerout", () => {
-            this.restart.setTint(0x33cc33);
           });
 
         this.menu = this.add
@@ -40,16 +36,13 @@ class GameOver extends Phaser.Scene {
         .setOrigin(0.5)
         .setInteractive()
         .setDepth(100)
-        .setTint(0x33cc33)
         .on("pointerup", async () => {
-          this.restart.removeInteractive();
+
           this.goMenu();
         })
         .on("pointerover", () => {
-          this.restart.setTint(0x009933);
         })
         .on("pointerout", () => {
-          this.restart.setTint(0x33cc33);
         });
       }
 

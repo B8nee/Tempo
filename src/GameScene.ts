@@ -22,6 +22,8 @@ class GameScene extends Phaser.Scene {
     portale: Phaser.GameObjects.Sprite;
     chkON: boolean = true;
     selectedEnemy: string;
+    cntSpw: number = 0;
+    contNem: number = 0;
 
     futuro1: Phaser.GameObjects.TileSprite;
     futuro2: Phaser.GameObjects.TileSprite;
@@ -111,14 +113,25 @@ class GameScene extends Phaser.Scene {
             key: this.selectedCharacter + '_spritesheet'
         }).setDepth(100);
 
-        this.enemy = new Enemy({
+        // this.enemy = new Enemy({
+        //     scene: this,
+        //     x: 1100,
+        //     y: 606,
+        //     key: this.selectedEnemy,
+        // }).setDepth(100);
+
+        this.addEnemy(this.enemy = new Enemy({
             scene: this,
             x: 1100,
             y: 606,
             key: this.selectedEnemy,
-        }).setDepth(100);
+        }).setDepth(100));
 
-        console.log(this.selectedEnemy);
+        this.contEnemy = 0;
+
+        this.cntSpw++;
+
+        this.contNem++;
 
         this.character = this.physics.add.existing(this.character);
 
@@ -169,6 +182,14 @@ class GameScene extends Phaser.Scene {
             this
         );
 
+        this.physics.add.collider(
+            this.shotGroup,
+            this.character,
+            this.hitCharacter,
+            undefined,
+            this
+        );
+
         this.animations = new Animations(this);
         
         if(this.selectedCharacter == 'rick_spritesheet'){
@@ -191,27 +212,29 @@ class GameScene extends Phaser.Scene {
         this.enemyGroup.add(enemy);
     }
 
-    removeEnemy(enemy: Enemy) {
+    removeEnemy(enemy?: Enemy) {
         this.chk = true;
-        
-            this.enemyGroup.remove(enemy, true, true);
-            this.enemy.destroy();
+       
+        this.enemyGroup.remove(enemy, true, true);
+        this.enemy.destroy();
 
+        this.events.emit('update-time');
+            
         this.contEnemy++;
 
         if(this.contEnemy == 5){
             this.contEnemy = 0;
             // this.level++;
-            if (this.level == 4) {
-                this.scene.remove('GameScene');
-                this.scene.remove('Hud');
-                this.scene.start('Menu');
-            }
+            // if (this.level == 4) {
+            //     this.scene.remove('GameScene');
+            //     this.scene.remove('Hud');
+            //     this.scene.start('Menu');
+            // }
             // this.create();
             // this.scene.stop("GameScene");
             // this.scene.start('GameScene', {level: this.level, selectedCharacter: this.selectedCharacter});
 
-            this.portale = this.add.sprite(640, 600, 'portal').setScale(0.5).setDepth(100);
+            this.portale = this.add.sprite(1100, 600, 'portal').setScale(1).setDepth(100);
             this.portale.play('portal').setFlipX(true);
             this.portale = this.physics.add.existing(this.portale);
 
@@ -224,9 +247,9 @@ class GameScene extends Phaser.Scene {
                 undefined,
                 this
             );
-
         }
 
+        if(this.cntSpw < 5){
             this.delay(Phaser.Math.Between(1000, 3000)).then(() => {
                 this.addEnemy(this.enemy = new Enemy({
                     scene: this,
@@ -235,6 +258,11 @@ class GameScene extends Phaser.Scene {
                     key: this.selectedEnemy,
                 }).setDepth(100));
             });
+            this.cntSpw++
+            this.contNem++;
+        } else {
+            this.cntSpw = 0;
+        }
 
         this.events.emit("update-score", [1]);
     }
@@ -245,7 +273,7 @@ class GameScene extends Phaser.Scene {
         if(this.contVite == 2){
             this.removeEnemy(enemy);
             this.contVite = 0;
-    }
+        }
     }
 
     hitCharacter() {

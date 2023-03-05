@@ -66,17 +66,17 @@ class Commands extends Phaser.Scene {
         .on("pointerover", () => this.menu.setFont('arcade_green'))
         .on("pointerout", () => this.menu.setFont('arcade'));
 
-        this.mySpaceBar = this.add.sprite(width*0.6, height- height/4, 'spacebar', 0).setInteractive();
-        this.add.bitmapText(width*0.6 + 50 , (height -height/4)-10, "arcade", "Shoot", 20);
+        this.mySpaceBar = this.add.sprite(665, 525, 'spacebar', 0).setInteractive().setOrigin(0);
+        this.add.bitmapText(width*0.6 + 10, (height -height/4)-10, "arcade", "Shoot", 20);
 
-        this.myShift = this.add.sprite(width*0.4, height- height/4, 'arrows', 0).setInteractive();
-        this.add.bitmapText(width*0.4 - 160 , (height -height/4)-10, "arcade", "Shoot Up", 20);
+        this.myShift = this.add.sprite(width*0.4 + 50, height- height/4, 'shift', 0).setInteractive();
+        this.add.bitmapText(width*0.4 - 180 , (height -height/4)-10, "arcade", "Shoot Up", 20);
 
-        this.myArrowDown = this.add.sprite(width - commandsBG_width * 0.4, 300, 'arrows', 0).setInteractive();
-        this.add.bitmapText(width - commandsBG_width * 0.4 + 30, 290, "arcade", "Crouch", 20);
+        this.myArrowDown = this.add.sprite(width - commandsBG_width * 0.4, 340, 'arrows', 0).setInteractive();
+        this.add.bitmapText(width - commandsBG_width * 0.4 + 30, 328, "arcade", "Crouch", 20);
 
-        this.myArrowUp = this.add.sprite(width - commandsBG_width, 300, 'arrows', 6).setInteractive();
-        this.add.bitmapText(width - commandsBG_width + 30, 290, "arcade", "Jump", 20);
+        this.myArrowUp = this.add.sprite(width - commandsBG_width, 340, 'arrows', 6).setInteractive();
+        this.add.bitmapText(width - commandsBG_width + 30, 328, "arcade", "Jump", 20);
 
         
         this.addEvents();
@@ -105,6 +105,10 @@ class Commands extends Phaser.Scene {
         else if(this.cursorKeys.up.isDown){
             this.myPlayer.play("jump", true);
             this.myArrowUp.play("arrowUp", true);
+        }
+        else if (this.cursorKeys.shift.isDown){
+            this.myPlayer.play("shoot", true);
+            this.myShift.play("shift", true);
         }
 
         else if(this.shooting){
@@ -158,6 +162,13 @@ class Commands extends Phaser.Scene {
         .on("pointerout", () => {
             this.stopAnimation(this.mySpaceBar, this.myPlayer, 0);
             this.eventIsListened = false;
+        });
+        this.myShift
+        .on("pointerover", () => {
+            this.startAnimation(this.myShift, this.myPlayer, "shift", "shoot");
+            this.eventIsListened = true;
+            this.shootFireBall();
+            this.myPlayer.on("animationcomplete",()=>{this.myPlayer.setFrame(0);})
         })
     }
 
