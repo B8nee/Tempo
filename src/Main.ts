@@ -9,7 +9,6 @@ import Hud from './Hud';
 import LevelChange from './LevelChange';
 import GameOver from "./GameOver";
 import GameWin from "./GameWin";
-import GameBoss from "./GameBoss";
 
 
 class Main extends Phaser.Scene {
@@ -35,14 +34,14 @@ const config = {
   physics:{
     default: 'arcade',
     arcade: {
-      debug: true,
+      debug: false,
       gravity: {
         y:1400
       },
     }
   },
 
-  scene: [Main, Preloader, Menu, CharacterSelection, Credits, Commands, GameScene, Hud, LevelChange, GameOver, GameWin, GameBoss],
+  scene: [Main, Preloader, Menu, CharacterSelection, Credits, Commands, GameScene, Hud, LevelChange, GameOver, GameWin],
 
   input: {
     activePointers: 2,

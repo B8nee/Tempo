@@ -233,16 +233,6 @@ class GameScene extends Phaser.Scene {
 
         if(this.contEnemy == 5){
             this.contEnemy = 0;
-            // this.level++;
-            // if (this.level == 4) {
-            //     this.scene.remove('GameScene');
-            //     this.scene.remove('Hud');
-            //     this.scene.start('Menu');
-            // }
-            // this.create();
-            // this.scene.stop("GameScene");
-            // this.scene.start('GameScene', {level: this.level, selectedCharacter: this.selectedCharacter});
-
             this.portale = this.add.sprite(1100, 600, 'portal').setScale(1).setDepth(100);
             this.portale.play('portal').setFlipX(true);
             this.portale = this.physics.add.existing(this.portale);
@@ -302,6 +292,11 @@ class GameScene extends Phaser.Scene {
     hitPortal() {
         this.chkON = false;
         this.level++;
+        if (this.level == 4) {
+            this.scene.remove('GameScene');
+            this.scene.remove('Hud');
+            this.scene.start('GameWin');
+        }
         this.events.emit("level-up", [this.level]);
         this.scene.stop('GameScene');
         this.scene.start('LevelChange', {level: this.level, selectedCharacter: this.selectedCharacter});

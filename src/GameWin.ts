@@ -24,10 +24,10 @@ class GameWin extends Phaser.Scene {
         this.goMenu();
       })
       .on("pointerover", () => {
-        this.restart;
+        this.menu.setFont("arcade_green");
       })
       .on("pointerout", () => {
-        this.restart;
+        this.menu.setFont("arcade");
       });
   }
 

@@ -27,8 +27,10 @@ class GameOver extends Phaser.Scene {
           this.goMenu();
         })
         .on("pointerover", () => {
+          this.menu.setFont("arcade_green");
         })
         .on("pointerout", () => {
+          this.menu.setFont("arcade");
         });
       }
       

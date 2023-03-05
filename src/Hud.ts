@@ -107,9 +107,6 @@ class Hud extends Phaser.Scene {
                 this.annoText.setFont("arcade");
                 this.cittaText.setFont("arcade");
                 break;
-            case 4:
-                this.bossLevel();
-                break;
             default:
                 break;
         }
