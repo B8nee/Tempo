@@ -3,5 +3,20 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: #333333;
+    animation: AnimateBG 10s ease infinite;
+    background-image: linear-gradient(
+          -45deg, 
+          rgba(67, 156, 239,1) 0%, 
+          rgba(47, 122, 229,1) 25%, 
+          rgba(29, 99, 220,1) 51%, 
+          rgba(8, 54, 193,1) 100%
+    );
+}
+
+@keyframes AnimateBG {
+
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+    
 }
